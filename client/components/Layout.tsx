@@ -44,7 +44,6 @@ export default function Layout({ children }: LayoutProps) {
 
   const isActive = (path: string) => {
     if (path.startsWith('#')) {
-      // For section links, we'll handle active state differently
       return false;
     }
     return location.pathname === path;
