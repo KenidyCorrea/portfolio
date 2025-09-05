@@ -156,7 +156,7 @@ export default function Index() {
     {
       icon: <MapPin className="h-5 w-5" />,
       label: "Localização",
-      value: "São Paulo, SP",
+      value: "Franca, SP",
       href: null
     }
   ];
@@ -763,89 +763,6 @@ export default function Index() {
             >
               <Card>
                 <CardHeader>
-                  <CardTitle>Envie uma mensagem</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Nome</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          type="text"
-                          placeholder="Seu nome"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="seu@email.com"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Assunto</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        placeholder="Sobre o que é?"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Mensagem</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        placeholder="Conte-me sobre seu projeto ou ideia..."
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <Button type="submit" className="w-full" disabled={isSubmitting}>
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                          Enviando...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-4 w-4 mr-2" />
-                          Enviar Mensagem
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
-
-            {/* Contact Information */}
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              {/* Contact Details */}
-              <Card>
-                <CardHeader>
                   <CardTitle>Informações de Contato</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -872,19 +789,28 @@ export default function Index() {
                 </CardContent>
               </Card>
 
+            </motion.div>
+
+            {/* Contact Information */}
+            <motion.div
+              initial={{ x: 20, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
               {/* Social Links */}
               <Card>
                 <CardHeader>
                   <CardTitle>Conecte-se comigo</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="">
                   {socialLinks.map((link, index) => (
                     <a
                       key={index}
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors group"
+                      className="flex items-center gap-3 p-1 rounded-lg hover:bg-muted transition-colors group"
                     >
                       <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                         {link.icon}
