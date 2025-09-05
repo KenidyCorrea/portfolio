@@ -2,28 +2,39 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight, Github, Linkedin, Mail, Download, Calendar, MapPin,
-  Code, GraduationCap, Briefcase, Star, ExternalLink, Filter, Send, Phone,
-  LinkedinIcon
+  GraduationCap, Briefcase, Star, ExternalLink, Filter,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import Layout from "@/components/Layout";
 
 export default function Index() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+
+  const handleDownloadCV = (language: string) => {
+    setShowLanguageOptions(false);
+
+    const cvPaths = {
+      portugues: "/cv_kenidy_pt.pdf",
+      ingles: "/cv_kenidy_eng.pdf"
+    };
+
+    const link = document.createElement("a");
+    link.href = cvPaths[language as keyof typeof cvPaths];
+    link.download = `Kenidy-Correa-CV-${language}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast({
+      title: "Download iniciado!",
+      description: `Currículo em ${language === 'portugues' ? 'português' : 'inglês'} está sendo baixado.`,
+    });
+  };
 
   const techStack = [
     "React", "TypeScript", "Node.js", "PostgreSQL",
@@ -182,29 +193,6 @@ export default function Index() {
 
   const featuredProjects = projects.filter(project => project.featured);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    toast({
-      title: "Mensagem enviada!",
-      description: "Obrigado por entrar em contato. Retornarei em breve.",
-    });
-
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
-  };
-
   return (
     <Layout>
       {/* Hero Section */}
@@ -322,10 +310,38 @@ export default function Index() {
                   <Mail className="ml-2 h-4 w-4" />
                 </Button>
               </a>
-              <Button variant="ghost" size="lg" className="group">
-                <Download className="mr-2 h-4 w-4" />
-                Baixar Currículo
-              </Button>
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  className="group"
+                  onClick={() => setShowLanguageOptions(!showLanguageOptions)}
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Baixar Currículo
+                </Button>
+
+                {showLanguageOptions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-background border rounded-md shadow-lg z-10"
+                  >
+                    <button
+                      className="w-full text-left px-4 py-2 hover:bg-muted transition-colors"
+                      onClick={() => handleDownloadCV('portugues')}
+                    >
+                      Português
+                    </button>
+                    <button
+                      className="w-full text-left px-4 py-2 hover:bg-muted transition-colors"
+                      onClick={() => handleDownloadCV('ingles')}
+                    >
+                      English
+                    </button>
+                  </motion.div>
+                )}
+              </div>
             </motion.div>
 
             {/* Social Links */}
