@@ -90,10 +90,11 @@ export default function Index() {
   const projects = [
     {
       id: 1,
-      title: "APP Paciente Oncológico",
+      title: "Conecta Santa Casa",
       description: "Aplicativo mobile para pacientes oncólogicos realizarem a gestão do tratamento com acompanhamento de agenda, conteúdos e registros de sintomas, além de chat para comunicação com a Equipe Hospitalar.",
       technologies: ["Expo", "PostgreSQL", "Typescript", "socket.IO"],
       category: "mobile",
+      image: "app-paciente.png",
       live: "",
       featured: true
     },
@@ -123,8 +124,8 @@ export default function Index() {
       description: "Um site portfolio responsivo demonstrando princípios de design moderno, animações suaves e pontuações ótimas de performance.",
       technologies: ["React", "Framer Motion", "Tailwind", "Vite"],
       category: "web",
-      github: "https://github.com",
-      live: "https://example.com",
+      github: "https://github.com/KenidyCorrea/portfolio",
+      live: "https://portfolio-6m0a.onrender.com/",
       image: 'portfolio.png',
       featured: false
     },
@@ -141,9 +142,10 @@ export default function Index() {
       id: 6,
       title: "Convite de Casamento",
       description: "Convite digital do meu casamento, com dados sobre local e forma de presentear.",
-      technologies: ["HTML", "CSS", "JavaScript"],
+      technologies: ["Vite", "Tailwind", "TypeScript"],
       category: "web",
       github: "https://github.com/KenidyCorrea/casamento",
+      live: "https://biaekenidy.com/",
       image: 'casamento.png',
       featured: true
     },
@@ -642,7 +644,7 @@ export default function Index() {
                         <Button size="sm" variant="outline" asChild>
                           <a href={project.live} target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="h-4 w-4 mr-2" />
-                            Demo Ao Vivo
+                            Demo
                           </a>
                         </Button>
                       )}
