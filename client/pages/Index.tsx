@@ -416,7 +416,7 @@ export default function Index() {
               Sobre Mim
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Desenvolvedor quase 2 anos de experiência criando soluções digitais
+              Desenvolvedor com quase 3 anos de experiência criando soluções digitais
               que fazem a diferença. Adoro transformar problemas complexos em designs simples e bonitos.
             </p>
           </motion.div>
