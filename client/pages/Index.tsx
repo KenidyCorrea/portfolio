@@ -155,8 +155,7 @@ export default function Index() {
     { id: "all", name: "Todos os Projetos" },
     { id: "web", name: "Web Apps" },
     { id: "mobile", name: "Mobile" },
-    { id: "desktop", name: "Desktop" },
-    { id: "api", name: "APIs" }
+    { id: "desktop", name: "Desktop" }
   ];
 
   const contactInfo = [

@@ -172,7 +172,7 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="mt-20 py-8 border-t border-border bg-background/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © 2025 Portfolio. Desenvolvido com React, Vite e Tailwind CSS.
+            © {new Date().getFullYear()} Portfolio. Desenvolvido com React, Vite e Tailwind CSS.
           </p>
         </div>
       </footer>
