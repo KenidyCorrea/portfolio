@@ -95,7 +95,7 @@ export default function Index() {
       technologies: ["Expo", "PostgreSQL", "Typescript", "socket.IO"],
       category: "mobile",
       image: "app-paciente.png",
-      live: "",
+      live: "https://conecta.gruposcf.com.br/",
       featured: true
     },
     {
@@ -110,12 +110,12 @@ export default function Index() {
     },
     {
       id: 3,
-      title: "ChatBot Agendamento",
-      description: "Integração entre o sistema de chatbot para WhatsApp ChatGuru e o sistema hospitalar Tasy. O Objetivo foi realizar agendamentos de consultas automaticamente direto com o paciente, registrando diretamente no EMR.",
-      technologies: ["Next.js", "Node.js", "PostgreSQL", "RabbitMQ"],
-      category: "api",
+      title: "SantaBot",
+      description: `SantaBot é um sistema que integra plataformas hospitalares, como Siresp e Tasy, a canais como WhatsApp, E-mail e Telegram, automatizando a comunicação com pacientes e equipes.`,
+      technologies: ["Next.js", "Node.js", "PostgreSQL", "BullMQ", "Meta API"],
+      category: "web",
       image: 'chatbot.png',
-      live: "https://wa.me/5516996807670",
+      live: "https://santabot.gruposcf.com.br",
       featured: true
     },
     {
