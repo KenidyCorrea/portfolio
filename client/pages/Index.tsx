@@ -90,22 +90,21 @@ export default function Index() {
   const projects = [
     {
       id: 1,
-      title: "Conecta Santa Casa",
-      description: "Aplicativo mobile para pacientes oncólogicos realizarem a gestão do tratamento com acompanhamento de agenda, conteúdos e registros de sintomas, além de chat para comunicação com a Equipe Hospitalar.",
-      technologies: ["Expo", "PostgreSQL", "Typescript", "socket.IO"],
-      category: "mobile",
-      image: "app-paciente.png",
-      live: "https://conecta.gruposcf.com.br/",
-      featured: true
+      title: "Landing Page Santa Labs",
+      description: "Site institucional da Santa Labs com scroll suave, animações de rolagem em GSAP e páginas dedicadas para cada produto do portfólio, gerado como site estático.",
+      technologies: ["Next.js", "GSAP", "Lenis", "TypeScript"],
+      category: "web",
+      live: "https://santalabs.com.br/",
+      image: 'santalabs.png',
+      featured: false
     },
     {
       id: 2,
-      title: "Balança Smart",
-      description: "Solução IoT para monitoramento inteligente de peso. A aplicação orienta uma sessão de pesagem com interações com o paciente, monitora o peso registra na balança e registra no EMR Hospitalar Tasy.",
-      technologies: ["HTML", "Javascript", "serialport", "Electron"],
-      category: "desktop",
-      image: "balanca-smart.png",
-      live: 'https://www.linkedin.com/feed/update/urn:li:activity:7348101545009283072/',
+      title: "SantaAnálise",
+      description: "Centro de monitoramento assistencial que centraliza os indicadores clínicos do hospital em painéis de tempo real. Alta hospitalar, ocupação de leitos e exportação de relatórios.",
+      technologies: ["Next.js", "Material UI", "ECharts", "Socket.IO"],
+      category: "web",
+      image: 'cma.png',
       featured: true
     },
     {
@@ -115,46 +114,43 @@ export default function Index() {
       technologies: ["Next.js", "Node.js", "PostgreSQL", "BullMQ", "Meta API"],
       category: "web",
       image: 'chatbot.png',
-      live: "https://santabot.gruposcf.com.br",
+      live: "https://santalabs.com.br/products/santabot/",
       featured: true
     },
     {
       id: 4,
-      title: "Site Portfolio",
-      description: "Um site portfolio responsivo demonstrando princípios de design moderno, animações suaves e pontuações ótimas de performance.",
-      technologies: ["React", "Framer Motion", "Tailwind", "Vite"],
-      category: "web",
-      github: "https://github.com/KenidyCorrea/portfolio",
-      live: "https://portfolio-6m0a.onrender.com/",
-      image: 'portfolio.png',
-      featured: false
+      title: "SantaAcesso",
+      description: "Totem de autoatendimento em modo kiosk para recepção hospitalar: check-in antecipado, confirmação de dados, assinatura digital e emissão de senha e pulseira, com ponte local que lê o Tasy e sincroniza filas com a API.",
+      technologies: ["Electron", "React", "Zustand", "OracleDB", "TypeScript"],
+      category: "desktop",
+      image: 'santaacesso.png',
+      live: "https://santalabs.com.br/products/totem/",
+      featured: true
     },
     {
       id: 5,
-      title: "Dashboard de Análise de Dados",
-      description: "Dashboard interativo para visualização de dados com gráficos, filtros e atualizações em tempo real. Criado para acompanhamento de alta hospitalar e ocupação de leitos.",
-      technologies: ["React", "Tailwind", "NestJS", "Next.js"],
-      category: "web",
-      image: 'cma.png',
+      title: "Balança Smart",
+      description: "Solução IoT para monitoramento inteligente de peso. A aplicação orienta uma sessão de pesagem com interações com o paciente, monitora o peso registra na balança e registra no EMR Hospitalar Tasy.",
+      technologies: ["HTML", "Javascript", "serialport", "Electron"],
+      category: "desktop",
+      image: "balanca-smart.png",
+      live: 'https://www.linkedin.com/feed/update/urn:li:activity:7348101545009283072/',
       featured: true
     },
     {
       id: 6,
-      title: "Convite de Casamento",
-      description: "Convite digital do meu casamento, com dados sobre local e forma de presentear.",
-      technologies: ["Vite", "Tailwind", "TypeScript"],
+      title: "SantaPag",
+      description: "Plataforma de gestão financeira de planos de saúde: sincronização de contratos com o EMR Tasy, cobranças recorrentes, links de pagamento e conciliação via Pix, cartão e boleto, com integração Getnet.",
+      technologies: ["React", "Vite", "Express", "Getnet"],
       category: "web",
-      github: "https://github.com/KenidyCorrea/casamento",
-      live: "https://biaekenidy.com/",
-      image: 'casamento.png',
+      image: "santapag.png",
       featured: true
-    },
+    }
   ];
 
   const categories = [
     { id: "all", name: "Todos os Projetos" },
     { id: "web", name: "Web Apps" },
-    { id: "mobile", name: "Mobile" },
     { id: "desktop", name: "Desktop" }
   ];
 
