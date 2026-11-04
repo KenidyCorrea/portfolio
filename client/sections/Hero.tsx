@@ -115,11 +115,12 @@ export function Hero() {
             aria-hidden="true"
             className="relative h-[2.3em] overflow-hidden font-display text-step-3 font-semibold text-signal-ink type-condensed sm:h-[1.2em] motion-reduce:h-auto"
           >
+            {/* inset-0: each role spans the full box, so yPercent: 110 clears it even when a longer role wraps to two lines. */}
             {hero.roles.map((role, index) => (
               <span
                 key={role}
                 data-role=""
-                className="absolute inset-x-0 top-0 sm:whitespace-nowrap motion-reduce:static motion-reduce:inline"
+                className="absolute inset-0 sm:whitespace-nowrap motion-reduce:static motion-reduce:inline"
               >
                 {role}
                 {index < hero.roles.length - 1 && <span className="hidden text-fog motion-reduce:inline"> / </span>}

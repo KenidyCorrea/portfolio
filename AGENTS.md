@@ -1,6 +1,6 @@
 # Kenidy Corrêa — Portfolio
 
-Static SPA portfolio (Senior Software Engineer, backend). React 18 + React Router 7 (library mode) + TypeScript (strict) + Vite + Tailwind 3, animated with GSAP 3 (@gsap/react) and Lenis. No backend: deployed as static files on Netlify.
+Static SPA portfolio (Senior Software Engineer, full stack). React 18 + React Router 7 (library mode) + TypeScript (strict) + Vite + Tailwind 3, animated with GSAP 3 (@gsap/react) and Lenis. No backend: deployed as static files on Netlify.
 
 ## Commands
 
