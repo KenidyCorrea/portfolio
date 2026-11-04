@@ -5,9 +5,9 @@ export const en: LocaleCopy = {
   locale: "en",
   htmlLang: "en",
   meta: {
-    title: "Kenidy Corrêa — Tech Lead & Backend Engineer",
+    title: "Kenidy Corrêa — Senior Software Engineer, Backend",
     description:
-      "Tech Lead and Backend Engineer building integrations, automation and critical systems in production, from healthcare to finance.",
+      "Senior Software Engineer focused on backend: integrations, automation and critical systems in production, from healthcare to finance.",
   },
   controls: {
     skipToContent: "Skip to content",
@@ -27,8 +27,8 @@ export const en: LocaleCopy = {
     contact: "Contact",
   },
   hero: {
-    roles: ["Tech Lead", "Backend Engineer", "Integrations & Automation"],
-    rolesSummary: "Tech Lead, Backend Engineer, Integrations and Automation",
+    roles: ["Senior Software Engineer", "Backend Engineer", "Integrations & Automation"],
+    rolesSummary: "Senior Software Engineer, Backend Engineer, Integrations and Automation",
     tagline:
       "I build backends that connect systems, automate workflows and run in production, from healthcare to finance.",
     domainsLabel: "Domains",
@@ -40,11 +40,12 @@ export const en: LocaleCopy = {
   about: {
     heading: "Most of my work sits between systems.",
     paragraphs: [
-      "I'm a Tech Lead and Backend Engineer at Grupo Santa Casa de Franca, where I lead the team behind SantaLabs, the group's healthcare products. We run messaging, self-service kiosks, IoT devices and payments that talk to the hospital's EMR every day.",
-      "Before healthcare I built RPA bots, scrapers and ETL pipelines for the financial market, feeding ERPs and BI. That work taught me to design for retries, idempotency and monitoring from the first commit.",
+      "I'm a backend-focused Senior Software Engineer at Santa Labs, the innovation lab of Grupo Santa Casa de Franca. I design and ship healthcare products that run in production every day: central authentication, WhatsApp messaging, self-service kiosks, digital signatures, payments, data dashboards and AI agents, all connected to the hospital's EHR.",
+      "Before healthcare I built RPA bots, scrapers and data extraction that fed the ERP for operations, finance and BI. That work taught me to design for retries, idempotency and monitoring from the first commit.",
     ],
     location: "Franca, São Paulo, Brazil",
-    availability: "Open to remote roles and to relocating to Spain, the EU or Canada.",
+    availability: "Open to remote roles, including B2B contracts, and to relocating to Spain, the EU or Canada.",
+    languages: "Portuguese (native), English (fluent), Spanish (advanced)",
     portraitAlt: "Portrait of Kenidy Corrêa",
     metricsHeading: "In numbers",
   },
@@ -108,12 +109,13 @@ export const en: LocaleCopy = {
   projectCopy: {
     santabot: {
       title: "SantaBot",
-      tagline: "Hospital messaging that connects SIRESP and Tasy to WhatsApp, e-mail and Telegram.",
+      tagline: "Hospital messaging that connects SIRESP and Tasy to WhatsApp, voice, e-mail and Telegram.",
       problem:
         "Appointment reminders, exam results and bed regulation updates depended on phone calls and manual messages, spread across systems that didn't talk to each other.",
       solution: [
         "An integration API reads events from the Tasy EMR and the SIRESP regulation system and turns them into messaging jobs.",
-        "BullMQ workers deliver each job to WhatsApp (Meta API), e-mail or Telegram with retries and delivery tracking.",
+        "BullMQ workers deliver each job to WhatsApp Business API, voice, e-mail or Telegram with retries and delivery tracking.",
+        "Flows cover appointment confirmations, campaigns, NPS surveys and teleconsultations.",
         "A Next.js panel lets teams manage templates, audiences and conversation history.",
       ],
       impact: ["Patient and team communication moved from manual calls to automated, traceable flows."],
@@ -127,22 +129,25 @@ export const en: LocaleCopy = {
         whatsapp: "WhatsApp",
         email: "E-mail",
         telegram: "Telegram",
+        voice: "Voice",
       },
     },
     santaacesso: {
       title: "SantaAcesso",
-      tagline: "Self-service kiosk for hospital reception: early check-in, signature and queue ticket.",
+      tagline: "Self-service kiosk, call displays and tablet app for hospital reception: early check-in, signature and queue ticket.",
       problem:
         "Reception desks handled check-in, data confirmation and queue tickets by hand, creating lines before patients even reached a clinician.",
       solution: [
         "A kiosk-mode Electron and React app guides the patient through check-in, data confirmation and digital signature.",
         "A local bridge reads appointments from Tasy (OracleDB) without exposing the database to the network.",
-        "The app syncs queues with the API, prints tickets and wristbands and feeds the call panels.",
+        "The app syncs queues with a NestJS API, prints tickets and wristbands and feeds the call panels.",
+        "A React Native (Expo) tablet app joins the same queues; every app ships through GitHub Actions.",
       ],
       impact: [],
       nodes: {
         patient: "Patient",
         kiosk: "Kiosk app",
+        tablet: "Tablet app",
         bridge: "Local bridge",
         queueApi: "Queue API",
         printer: "Ticket printer",
@@ -227,10 +232,10 @@ export const en: LocaleCopy = {
     },
     "etl-platform": {
       title: "ETL & scraping platform",
-      tagline: "Python bots that collect, validate and load market data into ERP and BI.",
-      problem: "Analysts copied data from portals and websites by hand before it could reach the ERP or BI.",
+      tagline: "RPA bots that collect, validate and load production data into the ERP and BI.",
+      problem: "Operations, finance and BI depended on data copied by hand from portals and websites.",
       solution: [
-        "Python RPA bots and scrapers collect data from external portals on a schedule.",
+        "RPA bots and scrapers (Selenium, Puppeteer, Playwright) collect data from external portals on a schedule.",
         "Jobs flow through RabbitMQ to ETL steps that validate and normalize each record.",
         "Clean data is loaded into the ERP and the BI dashboards.",
       ],
@@ -246,24 +251,27 @@ export const en: LocaleCopy = {
     },
     "santa-ia": {
       title: "santa-ia",
-      tagline: "LangGraph agents running on a local LLM, so hospital data stays on-premises.",
+      tagline: "AI agents on a self-hosted LLM with RAG, so hospital data stays on-premises.",
       problem: "Teams wanted AI assistance, but clinical and operational data could not leave the hospital network.",
       solution: [
-        "Agents orchestrated with LangGraph run against a local LLM.",
+        "A FastAPI service exposes agents orchestrated with LangGraph.",
+        "A self-hosted LLM (Ollama with Qwen3) answers with context retrieved from PostgreSQL + pgvector.",
         "Tools give the agents controlled access to internal systems.",
       ],
       impact: [],
       nodes: {
         user: "Staff request",
+        api: "FastAPI",
         graph: "LangGraph agents",
-        llm: "Local LLM",
+        llm: "Ollama (Qwen3)",
+        rag: "pgvector (RAG)",
         tools: "Tools",
         systems: "Internal systems",
       },
     },
     "santa-sign": {
-      title: "santa-sign",
-      tagline: "Electronic signature for hospital documents, built toward ICP-Brasil validity.",
+      title: "SantaSign",
+      tagline: "Electronic signature for clinical documents, built toward ICP-Brasil validity.",
       problem: "Consent forms and internal documents still depended on printing, signing and scanning.",
       solution: [
         "A signing service applies signatures to documents and records an audit trail.",
@@ -320,37 +328,48 @@ export const en: LocaleCopy = {
     kinds: { work: "Work", education: "Education", certification: "Certification" },
     items: [
       {
-        id: "santacasa",
+        id: "santalabs-senior",
         kind: "work",
-        organization: "Grupo Santa Casa de Franca / SantaLabs",
-        role: "Tech Lead & Full Stack Developer",
-        period: "2025 – present",
-        summary: "Technical lead for the team that builds and runs the group's healthcare products in production.",
+        organization: "Grupo Santa Casa de Franca / Santa Labs",
+        role: "Senior Software Engineer",
+        period: "Jun 2026 – present",
+        summary: "Backend-focused engineer on the team that builds and runs the group's healthcare products.",
         highlights: [
-          "Integrations with the Tasy EMR",
-          "Messaging over WhatsApp, e-mail and Telegram",
-          "Self-service kiosks and call panels",
-          "IoT devices that write into patient records",
-          "Payments with Getnet: Pix, card and boleto",
+          "Portfolio of 13 healthcare products, 9 of them in production",
+          "Central authentication with Tasy EHR login and per-module permissions",
+          "WhatsApp and voice messaging for confirmations, campaigns and NPS",
+          "Self-service kiosks, call displays and a tablet app with continuous deployment",
+          "Recurring billing with Getnet, financial automation and bank reconciliation",
+          "AI agents with LangGraph and a self-hosted LLM, with RAG on pgvector",
+          "Multi-cloud architecture (AWS, Cloudflare, on-prem) and the CI/CD standard",
         ],
+      },
+      {
+        id: "santalabs-fullstack",
+        kind: "work",
+        organization: "Grupo Santa Casa de Franca / Santa Labs",
+        role: "Full Stack Developer",
+        period: "Apr 2025 – Jun 2026",
+        summary: "Full stack development of the lab's products, from APIs and EHR integrations to kiosks, mobile apps and dashboards.",
+        highlights: [],
       },
       {
         id: "lev-dev",
         kind: "work",
         organization: "Lev Negócios",
         role: "Software Developer",
-        period: "2024 – 2025",
-        // TODO(kenidy): add details about the financial-market work
-        summary: "Automation and APIs for financial-market operations, in TypeScript and Python.",
-        highlights: ["RPA and APIs", "RabbitMQ and Docker", "React interfaces"],
+        period: "May 2024 – Apr 2025",
+        summary:
+          "TypeScript and Python systems: REST APIs, RPA bots with Selenium, Puppeteer and Playwright, RabbitMQ queues, Docker and React front ends.",
+        highlights: [],
       },
       {
         id: "lev-data",
         kind: "work",
         organization: "Lev Negócios",
         role: "Data Mining Analyst",
-        period: "2023 – 2024",
-        summary: "Python RPA, web scraping and ETL pipelines feeding the ERP and BI.",
+        period: "Jan 2023 – Apr 2024",
+        summary: "Built the production-data extraction that feeds the ERP for operations, finance and BI.",
         highlights: [],
       },
       {
@@ -358,7 +377,7 @@ export const en: LocaleCopy = {
         kind: "education",
         organization: "Univesp",
         role: "Bachelor's in Information Technology",
-        period: "2024 – 2027",
+        period: "2024 – 2027 (expected)",
         summary: "Software engineering, algorithms and databases.",
         highlights: [],
       },
@@ -375,7 +394,7 @@ export const en: LocaleCopy = {
   },
   contact: {
     heading: "Let's talk",
-    body: "Hiring for backend, integrations or a tech lead role? E-mail is the fastest way to reach me.",
+    body: "Hiring for backend or integration work, as an employee or a B2B contractor? E-mail is the fastest way to reach me.",
     emailLabel: "E-mail",
     socialLabel: "Elsewhere",
     locationLabel: "Based in",

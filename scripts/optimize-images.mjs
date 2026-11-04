@@ -57,7 +57,7 @@ function ogSvg() {
   <g stroke="${COLORS.line}" stroke-width="1" opacity="0.45">${grid}</g>
   <path d="M80 470 H360 L400 400 L440 520 L480 430 H1120" fill="none" stroke="${COLORS.amber}" stroke-width="4" stroke-linejoin="round"/>
   <text x="80" y="210" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="112" fill="${COLORS.paper}">Kenidy Corrêa</text>
-  <text x="84" y="290" font-family="Arial, sans-serif" font-size="40" fill="${COLORS.amber}">Tech Lead &amp; Backend Engineer</text>
+  <text x="84" y="290" font-family="Arial, sans-serif" font-size="40" fill="${COLORS.amber}">Senior Software Engineer · Backend</text>
   <text x="84" y="345" font-family="Arial, sans-serif" font-size="28" fill="${COLORS.fog}">Integrations, automation and critical systems: healthcare to finance</text>
 </svg>`;
 }

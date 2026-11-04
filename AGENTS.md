@@ -1,6 +1,6 @@
 # Kenidy Corrêa — Portfolio
 
-Static SPA portfolio (Tech Lead / Backend Engineer). React 18 + React Router 7 (library mode) + TypeScript (strict) + Vite + Tailwind 3, animated with GSAP 3 (@gsap/react) and Lenis. No backend: deployed as static files on Netlify.
+Static SPA portfolio (Senior Software Engineer, backend). React 18 + React Router 7 (library mode) + TypeScript (strict) + Vite + Tailwind 3, animated with GSAP 3 (@gsap/react) and Lenis. No backend: deployed as static files on Netlify.
 
 ## Commands
 
@@ -43,6 +43,7 @@ assets/source-images/      # Original images (input of npm run images, not deplo
 - **Text**: never hardcode visible strings in components. Add them to `LocaleCopy` in `content/types.ts`, then to both `pt.ts` and `en.ts`. `content.spec.ts` fails if the locales drift.
 - **Projects**: add metadata to `PROJECTS_META` (shared.ts) and copy to `projectCopy` in both locales. Every diagram node needs a label (max 24 chars). `isDraft: true` hides a project in production.
 - **Metrics**: fill `METRIC_VALUES` in shared.ts; `null` values are hidden in production.
+- **CVs**: the PDFs live in `public/` as `cv_kenidy_pt.pdf`, `cv_kenidy_eng.pdf` and `cv_kenidy_es.pdf`. To update one, overwrite the file and keep the name; download names and languages are set in `CV_FILES` (shared.ts). Keep site content (titles, dates, stacks, metrics) consistent with the CV.
 - **Animation**: use `useGSAP` with a `scope`, wrap setup in `gsap.matchMedia()` with `MOTION_QUERIES`, and keep a no-motion fallback (`prefers-reduced-motion`). Pinned layouts use the Tailwind `pin:` screen, which must mirror `MOTION_QUERIES.desktop`.
 - **Images**: add the original to `assets/source-images`, register it in `scripts/optimize-images.mjs`, run `npm run images`, and always set `width`/`height`.
 - **Security**: headers and CSP live in `netlify.toml` (`script-src 'self'`: no inline scripts, no third-party origins). No secrets in the repo; `.env*` is git-ignored.

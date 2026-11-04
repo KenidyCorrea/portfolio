@@ -13,17 +13,33 @@ export const PROFILE = {
   linkedin: { label: "LinkedIn", handle: "Kenidy Corrêa", href: "https://www.linkedin.com/in/kenidy-correa-3a7a14259/" },
 } as const;
 
-export const CV_FILES: Readonly<Record<Locale, string>> = {
-  pt: "/cv_kenidy_pt.pdf",
-  en: "/cv_kenidy_eng.pdf",
+/** CVs are offered in more languages than the site itself (Spanish for Spain-based roles). */
+export const CV_LANGUAGES = ["pt", "en", "es"] as const;
+export type CvLanguage = (typeof CV_LANGUAGES)[number];
+
+export interface CvFile {
+  href: string;
+  /** Name the browser saves the file as */
+  filename: string;
+  language: string;
+  lang: string;
+}
+
+export const CV_FILES: Readonly<Record<CvLanguage, CvFile>> = {
+  pt: { href: "/cv_kenidy_pt.pdf", filename: "Kenidy-Correa-CV-PT.pdf", language: "Português", lang: "pt-BR" },
+  en: { href: "/cv_kenidy_eng.pdf", filename: "Kenidy-Correa-CV-EN.pdf", language: "English", lang: "en" },
+  es: { href: "/cv_kenidy_es.pdf", filename: "Kenidy-Correa-CV-ES.pdf", language: "Español", lang: "es" },
 };
+
+/** CV highlighted by default for each site language */
+export const DEFAULT_CV: Readonly<Record<Locale, CvLanguage>> = { pt: "pt", en: "en" };
 
 export const PORTRAIT = { base: "portrait", width: 960, height: 1125 } as const;
 
 /** TODO(kenidy): fill in real numbers. null values are hidden in production builds. */
 export const METRIC_VALUES: Readonly<Record<MetricId, number | null>> = {
-  yearsExperience: null, // TODO: years of professional experience
-  productsInProduction: null, // TODO: products running in production
+  yearsExperience: 3, // since Jan 2023 (CV)
+  productsInProduction: 9, // 9 of 13 healthcare products (CV)
   integrations: null, // TODO: number of system integrations delivered
   monthlyVolume: null, // TODO: users or messages per month
 };
@@ -103,6 +119,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
         { id: "whatsapp", tier: 3, kind: "channel" },
         { id: "email", tier: 3, kind: "channel" },
         { id: "telegram", tier: 3, kind: "channel" },
+        { id: "voice", tier: 3, kind: "channel" },
       ],
       edges: [
         { from: "siresp", to: "api" },
@@ -113,13 +130,14 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
         { from: "queue", to: "whatsapp" },
         { from: "queue", to: "email" },
         { from: "queue", to: "telegram" },
+        { from: "queue", to: "voice" },
       ],
     },
   },
   {
     slug: "santaacesso",
     domains: ["healthcare", "automation"],
-    stack: ["Electron", "React", "TypeScript", "Zustand", "OracleDB", "Node.js"],
+    stack: ["Electron", "React", "React Native / Expo", "NestJS", "OracleDB", "GitHub Actions"],
     image: { base: "santaacesso", width: 1600, height: 1000 },
     links: [{ kind: "live", href: `${SANTALABS}/products/totem/` }],
     isDraft: false,
@@ -127,6 +145,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
       nodes: [
         { id: "patient", tier: 0, kind: "source" },
         { id: "kiosk", tier: 1, kind: "device" },
+        { id: "tablet", tier: 1, kind: "device" },
         { id: "bridge", tier: 2, kind: "service" },
         { id: "queueApi", tier: 2, kind: "service" },
         { id: "printer", tier: 2, kind: "device" },
@@ -138,6 +157,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
         { from: "kiosk", to: "bridge" },
         { from: "kiosk", to: "queueApi" },
         { from: "kiosk", to: "printer" },
+        { from: "tablet", to: "queueApi" },
         { from: "bridge", to: "tasy" },
         { from: "queueApi", to: "panel" },
       ],
@@ -173,8 +193,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   {
     slug: "scf-auth",
     domains: ["healthcare"],
-    // TODO(kenidy): confirm stack list
-    stack: ["NestJS", "TypeScript", "PostgreSQL", "HashiCorp Vault", "OpenAPI", "Tasy"],
+    stack: ["NestJS", "TypeScript", "PostgreSQL", "Oracle", "Tasy EHR", "Vault"],
     image: { base: "scf-auth", width: 1600, height: 758 },
     links: [],
     isDraft: false,
@@ -243,8 +262,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   {
     slug: "etl-platform",
     domains: ["data", "automation", "finance"],
-    // TODO(kenidy): confirm stack list
-    stack: ["Python", "RPA", "Web scraping", "RabbitMQ", "PostgreSQL", "Docker"],
+    stack: ["Python", "TypeScript", "Selenium", "Puppeteer", "Playwright", "RabbitMQ", "Docker"],
     image: null,
     links: [],
     isDraft: false,
@@ -269,22 +287,25 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   {
     slug: "santa-ia",
     domains: ["healthcare", "automation"],
-    // TODO(kenidy): confirm stack list (LLM runtime, vector store, etc.)
-    stack: ["Python", "LangGraph", "Local LLM"],
+    stack: ["Python", "LangGraph", "FastAPI", "Ollama (Qwen3)", "PostgreSQL + pgvector"],
     image: null,
     links: [],
     isDraft: false,
     architecture: {
       nodes: [
         { id: "user", tier: 0, kind: "source" },
-        { id: "graph", tier: 1, kind: "service" },
-        { id: "llm", tier: 2, kind: "service" },
-        { id: "tools", tier: 2, kind: "service" },
-        { id: "systems", tier: 3, kind: "store" },
+        { id: "api", tier: 1, kind: "service" },
+        { id: "graph", tier: 2, kind: "service" },
+        { id: "llm", tier: 3, kind: "service" },
+        { id: "rag", tier: 3, kind: "store" },
+        { id: "tools", tier: 3, kind: "service" },
+        { id: "systems", tier: 4, kind: "store" },
       ],
       edges: [
-        { from: "user", to: "graph" },
+        { from: "user", to: "api" },
+        { from: "api", to: "graph" },
         { from: "graph", to: "llm" },
+        { from: "graph", to: "rag" },
         { from: "graph", to: "tools" },
         { from: "tools", to: "systems" },
       ],

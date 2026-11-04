@@ -1,6 +1,5 @@
 import { useRef } from "react";
-import { CV_FILES, PROFILE } from "@/content/shared";
-import { LOCALES } from "@/content/types";
+import { CV_FILES, CV_LANGUAGES, DEFAULT_CV, PROFILE } from "@/content/shared";
 import { buttonClasses } from "@/components/ui/button-styles";
 import { Magnetic } from "@/components/ui/Magnetic";
 import { useSectionNav } from "@/hooks/useSectionNav";
@@ -9,7 +8,6 @@ import { useLocale } from "@/providers/LocaleProvider";
 
 const ROLE_HOLD_SECONDS = 2.2;
 const PARALLAX_PX = 18;
-const LANGUAGE_NAMES = { pt: "Português", en: "English" } as const;
 
 export function Hero() {
   const { content, locale } = useLocale();
@@ -115,13 +113,13 @@ export function Hero() {
           <p className="sr-only">{hero.rolesSummary}</p>
           <div
             aria-hidden="true"
-            className="relative h-[1.2em] overflow-hidden font-display text-step-3 font-semibold text-signal-ink type-condensed motion-reduce:h-auto"
+            className="relative h-[2.3em] overflow-hidden font-display text-step-3 font-semibold text-signal-ink type-condensed sm:h-[1.2em] motion-reduce:h-auto"
           >
             {hero.roles.map((role, index) => (
               <span
                 key={role}
                 data-role=""
-                className="absolute left-0 top-0 whitespace-nowrap motion-reduce:static motion-reduce:inline"
+                className="absolute inset-x-0 top-0 sm:whitespace-nowrap motion-reduce:static motion-reduce:inline"
               >
                 {role}
                 {index < hero.roles.length - 1 && <span className="hidden text-fog motion-reduce:inline"> / </span>}
@@ -168,20 +166,24 @@ export function Hero() {
               <span id="cv-label" className="pr-1 text-fog">
                 {hero.ctaCv}
               </span>
-              {LOCALES.map((option) => (
-                <a
-                  key={option}
-                  href={CV_FILES[option]}
-                  download
-                  hrefLang={option === "pt" ? "pt-BR" : "en"}
-                  className={buttonClasses(option === locale ? "outline" : "ghost", "min-h-11 px-3 text-step--1")}
-                >
-                  <span className="sr-only">{hero.ctaCv} </span>
-                  <abbr title={LANGUAGE_NAMES[option]} className="uppercase no-underline">
-                    {option}
-                  </abbr>
-                </a>
-              ))}
+              {CV_LANGUAGES.map((option) => {
+                const file = CV_FILES[option];
+                return (
+                  <a
+                    key={option}
+                    href={file.href}
+                    download={file.filename}
+                    hrefLang={file.lang}
+                    type="application/pdf"
+                    className={buttonClasses(option === DEFAULT_CV[locale] ? "outline" : "ghost", "min-h-11 px-3 text-step--1")}
+                  >
+                    <span className="sr-only">{hero.ctaCv} </span>
+                    <abbr title={file.language} className="uppercase no-underline">
+                      {option}
+                    </abbr>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>

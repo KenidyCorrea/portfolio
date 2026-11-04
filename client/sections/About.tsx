@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { MapPin, Plane } from "lucide-react";
+import { Languages, MapPin, Plane } from "lucide-react";
 import { PORTRAIT } from "@/content/shared";
 import type { Metric } from "@/content/types";
 import { gsap, MOTION_QUERIES, useGSAP } from "@/lib/gsap";
@@ -89,6 +89,10 @@ export function About() {
             <li className="flex items-start gap-3">
               <Plane className="mt-1 h-4 w-4 shrink-0 text-signal-ink" aria-hidden="true" />
               {about.availability}
+            </li>
+            <li className="flex items-start gap-3">
+              <Languages className="mt-1 h-4 w-4 shrink-0 text-signal-ink" aria-hidden="true" />
+              {about.languages}
             </li>
           </ul>
         </div>
