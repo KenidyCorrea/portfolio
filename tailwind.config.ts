@@ -41,7 +41,7 @@ export default {
         "step-5": ["clamp(3.25rem, 1rem + 11vw, 13rem)", { lineHeight: "0.86" }],
       },
       spacing: {
-        section: "clamp(6rem, 4rem + 8vw, 12rem)",
+        section: "clamp(4rem, 3rem + 3vw, 7rem)",
         gutter: "clamp(1rem, 0.5rem + 2.5vw, 3rem)",
       },
       maxWidth: {

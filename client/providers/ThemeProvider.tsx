@@ -3,7 +3,7 @@ import { STORAGE_KEYS, writePreference } from "@/lib/storage";
 
 export type Theme = "dark" | "light";
 
-const THEME_COLOR: Readonly<Record<Theme, string>> = { dark: "#0F242B", light: "#ECEFEB" };
+const THEME_COLOR: Readonly<Record<Theme, string>> = { dark: "#131519", light: "#F1F2F4" };
 
 interface ThemeContextValue {
   theme: Theme;

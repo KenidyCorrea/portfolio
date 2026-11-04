@@ -22,7 +22,7 @@ const SOURCES = [
   { name: "portrait", src: "comercial.jpg", widths: [480, 960] },
 ];
 
-const COLORS = { petrol: "#0F242B", line: "#26505C", paper: "#E6ECE8", amber: "#F5A524", fog: "#8FA9B0" };
+const COLORS = { graphite: "#131519", line: "#2E333A", paper: "#E9EBEE", amber: "#F5A524", fog: "#9BA2AC" };
 
 async function convert({ name, src, widths }) {
   const input = path.join(SOURCE_DIR, src);
@@ -40,7 +40,7 @@ async function convert({ name, src, widths }) {
 
 function faviconSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="${COLORS.petrol}"/>
+  <rect width="64" height="64" rx="12" fill="${COLORS.graphite}"/>
   <path d="M16 12h9v16l13-16h11L35 29l15 21H39L29 35l-4 5v10h-9z" fill="${COLORS.amber}"/>
   <rect x="16" y="54" width="14" height="3" rx="1.5" fill="${COLORS.paper}"/>
   <circle cx="37" cy="55.5" r="1.8" fill="${COLORS.paper}"/>
@@ -53,7 +53,7 @@ function ogSvg() {
   const grid = Array.from({ length: 21 }, (_, i) => `<line x1="${i * 60}" y1="0" x2="${i * 60}" y2="630" />`).join("") +
     Array.from({ length: 11 }, (_, i) => `<line x1="0" y1="${i * 60}" x2="1200" y2="${i * 60}" />`).join("");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="${COLORS.petrol}"/>
+  <rect width="1200" height="630" fill="${COLORS.graphite}"/>
   <g stroke="${COLORS.line}" stroke-width="1" opacity="0.45">${grid}</g>
   <path d="M80 470 H360 L400 400 L440 520 L480 430 H1120" fill="none" stroke="${COLORS.amber}" stroke-width="4" stroke-linejoin="round"/>
   <text x="80" y="210" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="112" fill="${COLORS.paper}">Kenidy Corrêa</text>

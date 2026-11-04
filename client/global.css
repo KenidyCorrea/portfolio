@@ -9,28 +9,28 @@
 @layer base {
   /* Colors are RGB channels so Tailwind can apply alpha: bg-signal/20 */
   :root {
-    --bg: 236 239 235; /* #ECEFEB paper */
-    --surface: 225 230 225; /* #E1E6E1 */
-    --line: 186 198 191; /* #BAC6BF */
-    --fg: 15 36 43; /* #0F242B petrol */
-    --fog: 74 94 99; /* #4A5E63, 5.9:1 on bg */
+    --bg: 241 242 244; /* #F1F2F4 paper */
+    --surface: 228 231 235; /* #E4E7EB */
+    --line: 196 202 210; /* #C4CAD2 */
+    --fg: 19 21 25; /* #131519 graphite */
+    --fog: 80 87 99; /* #505763, 6.5:1 on bg */
     --signal: 245 165 36; /* #F5A524 amber (fills only in light mode) */
-    --signal-ink: 154 88 0; /* #9A5800, 4.8:1 on bg for text */
-    --on-signal: 15 36 43;
+    --signal-ink: 154 88 0; /* #9A5800, 5:1 on bg for text */
+    --on-signal: 19 21 25;
     --grid-opacity: 0.55;
     --noise-opacity: 0.05;
     color-scheme: light;
   }
 
   .dark {
-    --bg: 15 36 43; /* #0F242B petrol */
-    --surface: 20 48 58; /* #14303A */
-    --line: 38 80 92; /* #26505C */
-    --fg: 230 236 232; /* #E6ECE8 */
-    --fog: 143 169 176; /* #8FA9B0, 6.5:1 on bg */
-    --signal: 245 165 36; /* #F5A524, 7.9:1 on bg */
+    --bg: 19 21 25; /* #131519 graphite */
+    --surface: 27 30 35; /* #1B1E23 */
+    --line: 46 51 58; /* #2E333A */
+    --fg: 233 235 238; /* #E9EBEE */
+    --fog: 155 162 172; /* #9BA2AC, 7.1:1 on bg */
+    --signal: 245 165 36; /* #F5A524, 9:1 on bg */
     --signal-ink: 245 165 36;
-    --on-signal: 15 36 43;
+    --on-signal: 19 21 25;
     --grid-opacity: 0.35;
     --noise-opacity: 0.07;
     color-scheme: dark;

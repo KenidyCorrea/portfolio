@@ -6,7 +6,7 @@ export function Stack() {
 
   return (
     <section id="stack" aria-labelledby="stack-title" className="border-t border-line/60 py-section outline-none">
-      <div className="frame grid gap-12 lg:grid-cols-12">
+      <div className="frame grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h2 id="stack-title" className="text-step-4 font-bold type-condensed">
             {stack.heading}

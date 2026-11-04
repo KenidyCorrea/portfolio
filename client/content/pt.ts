@@ -44,7 +44,6 @@ export const pt: LocaleCopy = {
       "Antes da saúde, construí robôs RPA, scrapers e a extração de dados que alimentava o ERP nos processos operacional, financeiro e de BI. Foi ali que aprendi a pensar em retentativas, idempotência e monitoramento desde o primeiro commit.",
     ],
     location: "Franca, São Paulo, Brasil",
-    availability: "Aberto a posições remotas, inclusive contrato B2B, e a relocação para Espanha, União Europeia ou Canadá.",
     languages: "Português (nativo), inglês (fluente), espanhol (avançado)",
     portraitAlt: "Retrato de Kenidy Corrêa",
     metricsHeading: "Em números",
@@ -394,7 +393,7 @@ export const pt: LocaleCopy = {
   },
   contact: {
     heading: "Vamos conversar",
-    body: "Contratando para backend ou integrações, como CLT ou contrato B2B? E-mail é o jeito mais rápido de falar comigo.",
+    body: "Contratando para backend ou integrações? E-mail é o jeito mais rápido de falar comigo.",
     emailLabel: "E-mail",
     socialLabel: "Redes",
     locationLabel: "Moro em",

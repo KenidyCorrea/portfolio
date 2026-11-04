@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Languages, MapPin, Plane } from "lucide-react";
+import { Languages, MapPin } from "lucide-react";
 import { PORTRAIT } from "@/content/shared";
 import type { Metric } from "@/content/types";
 import { gsap, MOTION_QUERIES, useGSAP } from "@/lib/gsap";
@@ -71,33 +71,45 @@ export function About() {
 
   return (
     <section ref={scope} id="about" aria-labelledby="about-title" className="py-section outline-none">
-      <div className="frame grid gap-12 lg:grid-cols-12">
+      <div className="frame grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7">
           <h2 id="about-title" className="max-w-[18ch] text-step-4 font-bold type-condensed">
             {about.heading}
           </h2>
-          <div className="mt-8 max-w-measure space-y-5 text-step-1 text-fog">
+          <div className="mt-6 max-w-measure space-y-4 text-step-1 text-fog">
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          <ul className="mt-10 space-y-3 text-step-0">
+          <ul className="mt-8 space-y-3 text-step-0">
             <li className="flex items-start gap-3">
               <MapPin className="mt-1 h-4 w-4 shrink-0 text-signal-ink" aria-hidden="true" />
               {about.location}
-            </li>
-            <li className="flex items-start gap-3">
-              <Plane className="mt-1 h-4 w-4 shrink-0 text-signal-ink" aria-hidden="true" />
-              {about.availability}
             </li>
             <li className="flex items-start gap-3">
               <Languages className="mt-1 h-4 w-4 shrink-0 text-signal-ink" aria-hidden="true" />
               {about.languages}
             </li>
           </ul>
+
+          {metrics.length > 0 && (
+            <div className="mt-10">
+              <h3 className="sr-only">{about.metricsHeading}</h3>
+              <dl className="grid grid-cols-2 gap-6 lg:auto-cols-fr lg:grid-flow-col lg:grid-cols-none">
+                {metrics.map((metric) => (
+                  <div key={metric.id} className="flex flex-col-reverse gap-1 border-t border-line pt-4">
+                    <dt className="text-step--1 text-fog">{metric.label}</dt>
+                    <dd className="font-display text-step-4 font-bold tabular-nums type-condensed">
+                      <MetricValue metric={metric} formatter={formatter} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
         </div>
 
-        <figure className="lg:col-span-4 lg:col-start-9 lg:mt-24">
+        <figure className="lg:col-span-4 lg:col-start-9 lg:mt-12">
           <div className="relative">
             <div aria-hidden="true" className="absolute -bottom-4 -right-4 h-full w-full border border-signal" />
             <img
@@ -114,22 +126,6 @@ export function About() {
           </div>
         </figure>
       </div>
-
-      {metrics.length > 0 && (
-        <div className="frame mt-section">
-          <h3 className="sr-only">{about.metricsHeading}</h3>
-          <dl className="grid grid-cols-2 border-t border-line lg:grid-cols-4">
-            {metrics.map((metric) => (
-              <div key={metric.id} className="flex flex-col-reverse gap-2 border-b border-line py-8 pr-6 lg:border-b-0">
-                <dt className="text-step--1 text-fog">{metric.label}</dt>
-                <dd className="font-display text-step-4 font-bold tabular-nums type-condensed">
-                  <MetricValue metric={metric} formatter={formatter} />
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      )}
     </section>
   );
 }
