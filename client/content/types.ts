@@ -1,17 +1,17 @@
 export const LOCALES = ["pt", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const DOMAIN_IDS = ["healthcare", "finance", "payments", "data", "automation"] as const;
+export const DOMAIN_IDS = ["healthcare", "finance", "payments", "data", "automation", "apps"] as const;
 export type DomainId = (typeof DOMAIN_IDS)[number];
 
 export const PROJECT_SLUGS = [
   "santabot",
   "santaacesso",
   "santapag",
-  "scf-auth",
+  "santaworks",
+  "autenticador",
   "balanca-smart",
   "santaanalise",
-  "etl-platform",
   "santa-ia",
   "santa-sign",
   "santalabs-landing",
@@ -19,10 +19,10 @@ export const PROJECT_SLUGS = [
 ] as const;
 export type ProjectSlug = (typeof PROJECT_SLUGS)[number];
 
-export const METRIC_IDS = ["yearsExperience", "productsInProduction", "integrations", "monthlyVolume"] as const;
+export const METRIC_IDS = ["yearsExperience", "integrations", "monthlyVolume"] as const;
 export type MetricId = (typeof METRIC_IDS)[number];
 
-export const SKILL_GROUP_IDS = ["backend", "data", "infra", "integrations", "frontend"] as const;
+export const SKILL_GROUP_IDS = ["backend", "frontend", "data", "infra", "integrations"] as const;
 export type SkillGroupId = (typeof SKILL_GROUP_IDS)[number];
 
 export interface Domain {

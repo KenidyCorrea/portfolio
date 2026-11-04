@@ -33,7 +33,7 @@ function CaseStudyView({ project, next, content }: { project: Project; next: Pro
   const { caseStudy, domains } = content;
   const scope = useRef<HTMLElement>(null);
   const isWide = useMediaQuery("(min-width: 768px)");
-  usePageEnter(`${project.title} — ${PROFILE.name}`);
+  usePageEnter(`${project.title} | ${PROFILE.name}`);
 
   // Intro plays once per project (the view is keyed by slug).
   useGSAP(

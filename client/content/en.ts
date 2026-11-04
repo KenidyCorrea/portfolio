@@ -5,9 +5,9 @@ export const en: LocaleCopy = {
   locale: "en",
   htmlLang: "en",
   meta: {
-    title: "Kenidy Corrêa — Senior Software Engineer, Backend",
+    title: "Kenidy Corrêa | Senior Software Engineer",
     description:
-      "Senior Software Engineer focused on backend: integrations, automation and critical systems in production, from healthcare to finance.",
+      "Full stack Senior Software Engineer. I build APIs, integrations, automation and web, desktop and mobile apps that run in production.",
   },
   controls: {
     skipToContent: "Skip to content",
@@ -27,10 +27,10 @@ export const en: LocaleCopy = {
     contact: "Contact",
   },
   hero: {
-    roles: ["Senior Software Engineer", "Backend Engineer", "Integrations & Automation"],
-    rolesSummary: "Senior Software Engineer, Backend Engineer, Integrations and Automation",
+    roles: ["Senior Software Engineer", "Full Stack", "Integrations & automation"],
+    rolesSummary: "Senior Software Engineer, full stack, integrations and automation",
     tagline:
-      "I build backends that connect systems, automate workflows and run in production, from healthcare to finance.",
+      "I build APIs, integrations and the screens people use every day. I like connecting systems that were never meant to talk to each other.",
     domainsLabel: "Domains",
     ctaProjects: "See projects",
     ctaContact: "Contact",
@@ -38,10 +38,11 @@ export const en: LocaleCopy = {
     cvLanguageLabel: "CV language",
   },
   about: {
-    heading: "Most of my work sits between systems.",
+    heading: "Almost everything I build connects one system to another, or to a person.",
     paragraphs: [
-      "I'm a backend-focused Senior Software Engineer at Santa Labs, the innovation lab of Grupo Santa Casa de Franca. I design and ship healthcare products that run in production every day: central authentication, WhatsApp messaging, self-service kiosks, digital signatures, payments, data dashboards and AI agents, all connected to the hospital's EHR.",
-      "Before healthcare I built RPA bots, scrapers and data extraction that fed the ERP for operations, finance and BI. That work taught me to design for retries, idempotency and monitoring from the first commit.",
+      "I'm a Senior Software Engineer at Santa Labs, the innovation lab of Grupo Santa Casa de Franca, and I work on both ends. I write APIs, queues and integrations with the EHR, the ERP and government portals, plus the React, Next.js, Electron and React Native interfaces that reception, finance and clinical teams use every day.",
+      "What's live today includes the SSO every internal system logs in through, SantaWorks (invoices and reconciliation), WhatsApp messaging, self-service kiosks, recurring billing and AI agents. Counting APIs, workers and apps, that's dozens of services in production.",
+      "Before that I built RPA bots, scrapers and the data extraction that fed an ERP. That's where I learned to design for retries, idempotency and monitoring from the first commit. I work in healthcare now, but the problem shows up in any company: an old system that can't go down, data stuck in spreadsheets and someone typing the same thing twice.",
     ],
     location: "Franca, São Paulo, Brazil",
     languages: "Portuguese (native), English (fluent), Spanish (advanced)",
@@ -50,7 +51,6 @@ export const en: LocaleCopy = {
   },
   metrics: [
     { id: "yearsExperience", value: METRIC_VALUES.yearsExperience, suffix: "+", label: "years shipping software" },
-    { id: "productsInProduction", value: METRIC_VALUES.productsInProduction, suffix: "", label: "products in production" },
     { id: "integrations", value: METRIC_VALUES.integrations, suffix: "+", label: "system integrations" },
     { id: "monthlyVolume", value: METRIC_VALUES.monthlyVolume, suffix: "", label: "messages per month" },
   ],
@@ -58,11 +58,11 @@ export const en: LocaleCopy = {
   integration: {
     heading: "How I integrate systems",
     intro:
-      "Hospitals and finance teams run on software nobody wants to rewrite. I connect to it, put a stable contract in front of it and make every message reach its destination.",
+      "Every large operation runs on some piece of software nobody wants to rewrite. I connect to it, put a stable contract in front of it and make every message reach its destination.",
     steps: [
       {
         title: "Connect",
-        body: "Adapters for what already runs: EMR databases, ERPs and legacy services, read without disrupting them.",
+        body: "Adapters for what already runs: EMRs, ERPs, government portals and legacy services, read without disrupting them.",
       },
       {
         title: "Normalize",
@@ -70,11 +70,11 @@ export const en: LocaleCopy = {
       },
       {
         title: "Queue",
-        body: "Work goes through BullMQ or RabbitMQ with retries and idempotency, so a slow partner never blocks a patient.",
+        body: "Work goes through BullMQ or RabbitMQ with retries and idempotency, so a slow partner doesn't hold up the rest of the operation.",
       },
       {
         title: "Deliver",
-        body: "Messages, payments and data reach WhatsApp, Getnet or BI, with every step logged and traceable.",
+        body: "Messages, payments and data reach WhatsApp, the payment gateway, the ERP or a screen, and every step is logged.",
       },
     ],
     diagramTitle: "Legacy, ERP and EMR systems feed an API, which queues work for channels, payments and data.",
@@ -91,14 +91,15 @@ export const en: LocaleCopy = {
   },
   domains: [
     { id: "healthcare", label: "Healthcare", longLabel: "Healthcare" },
-    { id: "finance", label: "Finance", longLabel: "Finance" },
+    { id: "finance", label: "Finance", longLabel: "Finance & tax" },
     { id: "payments", label: "Payments", longLabel: "Payments" },
     { id: "data", label: "Data", longLabel: "Data/ETL" },
     { id: "automation", label: "Automation", longLabel: "Automation (RPA)" },
+    { id: "apps", label: "Apps", longLabel: "Web, desktop & mobile apps" },
   ],
   projects: {
     heading: "Selected work",
-    intro: "Products running in hospitals and finance operations. Open one to see the problem, the architecture and the stack.",
+    intro: "Part of what's in production today: APIs, apps, dashboards and automation. Open a project to see the problem, the architecture and the stack.",
     filterLabel: "Filter projects by domain",
     filterAll: "All",
     openCaseStudy: "Read case study",
@@ -175,21 +176,43 @@ export const en: LocaleCopy = {
         recon: "Reconciliation",
       },
     },
-    "scf-auth": {
-      title: "scf-auth",
-      tagline: "Central authentication for the group's apps, with login through Tasy.",
+    santaworks: {
+      title: "SantaWorks",
+      tagline: "Tax and finance back office: pulls NF-e and NFS-e invoices, checks them against Tasy, posts and reconciles.",
+      problem:
+        "The finance team downloaded invoices from government portals, checked each one against Tasy and built reconciliations in spreadsheets, by hand, every month.",
+      solution: [
+        "Scheduled jobs fetch NF-e from SEFAZ distribution and NFS-e from the national service, register the recipient acknowledgment and render DANFE and DANFSE.",
+        "Each invoice is checked against Tasy. Mismatches become a queue for the team to resolve, and a worker posts the approved ones.",
+        "A reconciliation module matches bank statements, receivables and services purchased.",
+        "A Next.js and Material UI front end puts tax, finance and bed regulation in one place, with login through the Autenticador SSO.",
+      ],
+      impact: [],
+      nodes: {
+        fiscal: "SEFAZ & national NFS-e",
+        bank: "Bank statements",
+        jobs: "Scheduled jobs",
+        api: "NestJS API",
+        db: "PostgreSQL",
+        tasy: "Tasy (OracleDB)",
+        web: "Next.js front end",
+      },
+    },
+    autenticador: {
+      title: "Autenticador",
+      tagline: "The group's SSO: one login, checked against Tasy, for every internal system.",
       problem:
         "Each internal product had its own login and permission rules, so access was hard to audit and revoke.",
       solution: [
-        "A NestJS service authenticates users against Tasy and issues tokens for every product of the group.",
-        "Roles, modules, sectors and establishments are modeled once and shared by all apps.",
-        "Secrets live in Vault; an admin console manages access and revocation.",
+        "A NestJS service authenticates users against Tasy and issues tokens that every product of the group accepts.",
+        "Roles, modules, sectors and establishments are modeled once and apply to every app.",
+        "Secrets live in Vault, and an admin console handles access and revocation.",
       ],
       impact: [],
       nodes: {
         apps: "Group apps",
         console: "Admin console",
-        auth: "scf-auth",
+        auth: "Autenticador (SSO)",
         tasy: "Tasy login",
         db: "Roles & permissions",
         vault: "Vault",
@@ -227,25 +250,6 @@ export const en: LocaleCopy = {
         realtime: "Socket.IO",
         dashboards: "Dashboards",
         reports: "Reports",
-      },
-    },
-    "etl-platform": {
-      title: "ETL & scraping platform",
-      tagline: "RPA bots that collect, validate and load production data into the ERP and BI.",
-      problem: "Operations, finance and BI depended on data copied by hand from portals and websites.",
-      solution: [
-        "RPA bots and scrapers (Selenium, Puppeteer, Playwright) collect data from external portals on a schedule.",
-        "Jobs flow through RabbitMQ to ETL steps that validate and normalize each record.",
-        "Clean data is loaded into the ERP and the BI dashboards.",
-      ],
-      impact: [],
-      nodes: {
-        sources: "Portals & websites",
-        scrapers: "Python scrapers",
-        queue: "RabbitMQ",
-        etl: "ETL & validation",
-        erp: "ERP",
-        bi: "BI",
       },
     },
     "santa-ia": {
@@ -316,10 +320,10 @@ export const en: LocaleCopy = {
     intro: "Grouped by the job each tool does in production.",
     groups: [
       { id: "backend", title: "Backend", items: SKILL_ITEMS.backend },
+      { id: "frontend", title: "Front end & apps", items: SKILL_ITEMS.frontend },
       { id: "data", title: "Data", items: SKILL_ITEMS.data },
       { id: "infra", title: "Infrastructure", items: SKILL_ITEMS.infra },
       { id: "integrations", title: "Integrations", items: SKILL_ITEMS.integrations },
-      { id: "frontend", title: "Frontend", items: SKILL_ITEMS.frontend },
     ],
   },
   experience: {
@@ -332,13 +336,15 @@ export const en: LocaleCopy = {
         organization: "Grupo Santa Casa de Franca / Santa Labs",
         role: "Senior Software Engineer",
         period: "Jun 2026 – present",
-        summary: "Backend-focused engineer on the team that builds and runs the group's healthcare products.",
+        summary:
+          "Full stack engineer on the team that builds and runs the group's systems: patient services, operations, tax and finance.",
         highlights: [
-          "Portfolio of 13 healthcare products, 9 of them in production",
-          "Central authentication with Tasy EHR login and per-module permissions",
+          "Dozens of services in production across APIs, workers and web, desktop and mobile apps",
+          "Autenticador (SSO) with Tasy EHR login and per-app, per-module permissions",
+          "SantaWorks: NF-e and NFS-e capture, checks against Tasy and bank reconciliation",
           "WhatsApp and voice messaging for confirmations, campaigns and NPS",
           "Self-service kiosks, call displays and a tablet app with continuous deployment",
-          "Recurring billing with Getnet, financial automation and bank reconciliation",
+          "Recurring billing with Getnet",
           "AI agents with LangGraph and a self-hosted LLM, with RAG on pgvector",
           "Multi-cloud architecture (AWS, Cloudflare, on-prem) and the CI/CD standard",
         ],
@@ -393,7 +399,7 @@ export const en: LocaleCopy = {
   },
   contact: {
     heading: "Let's talk",
-    body: "Hiring for backend or integration work? E-mail is the fastest way to reach me.",
+    body: "Hiring, or have a project in mind? E-mail is the fastest way to reach me.",
     emailLabel: "E-mail",
     socialLabel: "Elsewhere",
     locationLabel: "Based in",

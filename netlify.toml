@@ -9,6 +9,17 @@
 # certificate is provisioned (automatic for *.netlify.app and custom domains).
 # HSTS + upgrade-insecure-requests below keep browsers on HTTPS afterwards.
 
+# Renamed case studies keep their old links working.
+[[redirects]]
+  from = "/projects/scf-auth"
+  to = "/projects/autenticador"
+  status = 301
+
+[[redirects]]
+  from = "/projects/etl-platform"
+  to = "/projects/santaworks"
+  status = 301
+
 # SPA fallback so deep links like /projects/santabot resolve to the app.
 [[redirects]]
   from = "/*"

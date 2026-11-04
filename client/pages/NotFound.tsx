@@ -6,7 +6,7 @@ import { useLocale } from "@/providers/LocaleProvider";
 
 export default function NotFound() {
   const { content } = useLocale();
-  usePageEnter(`404 — ${content.notFound.title}`);
+  usePageEnter(`404 | ${content.notFound.title}`);
 
   return (
     <SiteLayout>

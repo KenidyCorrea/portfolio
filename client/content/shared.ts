@@ -39,7 +39,6 @@ export const PORTRAIT = { base: "portrait", width: 960, height: 1125 } as const;
 /** TODO(kenidy): fill in real numbers. null values are hidden in production builds. */
 export const METRIC_VALUES: Readonly<Record<MetricId, number | null>> = {
   yearsExperience: 3, // since Jan 2023 (CV)
-  productsInProduction: 9, // 9 of 13 healthcare products (CV)
   integrations: null, // TODO: number of system integrations delivered
   monthlyVolume: null, // TODO: users or messages per month
 };
@@ -72,7 +71,7 @@ export const SKILL_ITEMS: Readonly<Record<SkillGroupId, readonly string[]>> = {
   data: ["PostgreSQL", "OracleDB", "BullMQ", "RabbitMQ", "ETL / Web scraping"],
   infra: ["Docker", "Nginx", "Certbot / SSL", "Cloudflare", "AWS"],
   integrations: ["WhatsApp Business API", "Twilio", "Getnet", "Tasy (EMR)", "REST / Webhooks"],
-  frontend: ["React", "Next.js", "Electron", "React Native"],
+  frontend: ["React", "Next.js", "Electron", "React Native / Expo", "Material UI", "Tailwind CSS", "GSAP"],
 };
 
 /** Generic flow used by the "How I integrate systems" section */
@@ -136,7 +135,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   },
   {
     slug: "santaacesso",
-    domains: ["healthcare", "automation"],
+    domains: ["healthcare", "automation", "apps"],
     stack: ["Electron", "React", "React Native / Expo", "NestJS", "OracleDB", "GitHub Actions"],
     image: { base: "santaacesso", width: 1600, height: 1000 },
     links: [{ kind: "live", href: `${SANTALABS}/products/totem/` }],
@@ -191,8 +190,36 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
     },
   },
   {
-    slug: "scf-auth",
-    domains: ["healthcare"],
+    slug: "santaworks",
+    domains: ["finance", "data", "automation", "apps"],
+    stack: ["NestJS", "TypeScript", "PostgreSQL", "Sequelize", "OracleDB", "Next.js", "Material UI", "TanStack Query", "Docker"],
+    image: null,
+    links: [],
+    isDraft: false,
+    architecture: {
+      nodes: [
+        { id: "fiscal", tier: 0, kind: "external" },
+        { id: "bank", tier: 0, kind: "source" },
+        { id: "jobs", tier: 1, kind: "queue" },
+        { id: "api", tier: 2, kind: "service" },
+        { id: "db", tier: 3, kind: "store" },
+        { id: "tasy", tier: 3, kind: "store" },
+        { id: "web", tier: 3, kind: "channel" },
+      ],
+      edges: [
+        { from: "fiscal", to: "jobs" },
+        { from: "bank", to: "jobs" },
+        { from: "jobs", to: "api" },
+        { from: "api", to: "db" },
+        { from: "api", to: "tasy" },
+        { from: "api", to: "web" },
+      ],
+    },
+  },
+  {
+    // Image files keep the old "scf-auth" base name (scripts/optimize-images.mjs).
+    slug: "autenticador",
+    domains: ["healthcare", "apps"],
     stack: ["NestJS", "TypeScript", "PostgreSQL", "Oracle", "Tasy EHR", "Vault"],
     image: { base: "scf-auth", width: 1600, height: 758 },
     links: [],
@@ -217,7 +244,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   },
   {
     slug: "balanca-smart",
-    domains: ["healthcare", "automation"],
+    domains: ["healthcare", "automation", "apps"],
     stack: ["Electron", "JavaScript", "serialport", "Tasy integration"],
     image: { base: "balanca-smart", width: 1600, height: 900 },
     links: [{ kind: "post", href: "https://www.linkedin.com/feed/update/urn:li:activity:7348101545009283072/" }],
@@ -238,7 +265,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   },
   {
     slug: "santaanalise",
-    domains: ["healthcare", "data"],
+    domains: ["healthcare", "data", "apps"],
     stack: ["Next.js", "Material UI", "ECharts", "Socket.IO", "Node.js"],
     image: { base: "santaanalise", width: 1600, height: 758 },
     links: [],
@@ -256,31 +283,6 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
         { from: "queries", to: "realtime" },
         { from: "realtime", to: "dashboards" },
         { from: "queries", to: "reports" },
-      ],
-    },
-  },
-  {
-    slug: "etl-platform",
-    domains: ["data", "automation", "finance"],
-    stack: ["Python", "TypeScript", "Selenium", "Puppeteer", "Playwright", "RabbitMQ", "Docker"],
-    image: null,
-    links: [],
-    isDraft: false,
-    architecture: {
-      nodes: [
-        { id: "sources", tier: 0, kind: "external" },
-        { id: "scrapers", tier: 1, kind: "service" },
-        { id: "queue", tier: 2, kind: "queue" },
-        { id: "etl", tier: 3, kind: "service" },
-        { id: "erp", tier: 4, kind: "store" },
-        { id: "bi", tier: 4, kind: "channel" },
-      ],
-      edges: [
-        { from: "sources", to: "scrapers" },
-        { from: "scrapers", to: "queue" },
-        { from: "queue", to: "etl" },
-        { from: "etl", to: "erp" },
-        { from: "etl", to: "bi" },
       ],
     },
   },
@@ -337,7 +339,7 @@ export const PROJECTS_META: readonly ProjectMeta[] = [
   },
   {
     slug: "santalabs-landing",
-    domains: ["healthcare"],
+    domains: ["apps"],
     stack: ["Next.js", "TypeScript", "GSAP", "Lenis"],
     image: { base: "santalabs", width: 1600, height: 758 },
     links: [{ kind: "live", href: `${SANTALABS}/` }],

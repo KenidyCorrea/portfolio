@@ -5,9 +5,9 @@ export const pt: LocaleCopy = {
   locale: "pt",
   htmlLang: "pt-BR",
   meta: {
-    title: "Kenidy Corrêa — Engenheiro de Software Sênior, Backend",
+    title: "Kenidy Corrêa | Engenheiro de Software Sênior",
     description:
-      "Engenheiro de Software Sênior com foco em backend: integrações, automação e sistemas críticos em produção, da saúde ao mercado financeiro.",
+      "Engenheiro de Software Sênior full stack. Construo APIs, integrações, automações e apps web, desktop e mobile que rodam em produção.",
   },
   controls: {
     skipToContent: "Pular para o conteúdo",
@@ -27,10 +27,10 @@ export const pt: LocaleCopy = {
     contact: "Contato",
   },
   hero: {
-    roles: ["Engenheiro de Software Sênior", "Engenheiro Backend", "Integrações & Automação"],
-    rolesSummary: "Engenheiro de Software Sênior, Engenheiro Backend, Integrações e Automação",
+    roles: ["Engenheiro de Software Sênior", "Full Stack", "Integrações e automação"],
+    rolesSummary: "Engenheiro de Software Sênior, full stack, integrações e automação",
     tagline:
-      "Construo backends que conectam sistemas, automatizam processos e rodam em produção, da saúde ao mercado financeiro.",
+      "Construo APIs, integrações e as telas que as equipes usam todo dia. Gosto de ligar sistemas que nunca foram feitos para conversar.",
     domainsLabel: "Domínios",
     ctaProjects: "Ver projetos",
     ctaContact: "Contato",
@@ -38,10 +38,11 @@ export const pt: LocaleCopy = {
     cvLanguageLabel: "Idioma do CV",
   },
   about: {
-    heading: "Quase todo o meu trabalho fica entre sistemas.",
+    heading: "Quase tudo que eu construo liga um sistema a outro, ou a alguém.",
     paragraphs: [
-      "Sou Engenheiro de Software Sênior com foco em backend no Santa Labs, laboratório de inovação do Grupo Santa Casa de Franca. Projeto e entrego produtos de saúde que rodam em produção todos os dias: autenticação central, mensageria via WhatsApp, totens de autoatendimento, assinatura digital, pagamentos, painéis de dados e agentes de IA, todos conectados ao prontuário do hospital.",
-      "Antes da saúde, construí robôs RPA, scrapers e a extração de dados que alimentava o ERP nos processos operacional, financeiro e de BI. Foi ali que aprendi a pensar em retentativas, idempotência e monitoramento desde o primeiro commit.",
+      "Sou Engenheiro de Software Sênior no Santa Labs, o laboratório de inovação do Grupo Santa Casa de Franca. Trabalho nas duas pontas. Escrevo APIs, filas e integrações com prontuário, ERP e portais do governo, e também as interfaces em React, Next.js, Electron e React Native que recepção, financeiro e equipes clínicas usam no dia a dia.",
+      "Entre o que está no ar hoje: o SSO que autentica todos os sistemas do grupo, o SantaWorks (notas fiscais e conciliação), a mensageria no WhatsApp, os totens de autoatendimento, a cobrança recorrente e agentes de IA. Contando APIs, workers e apps, são dezenas de serviços em produção.",
+      "Antes disso, construí robôs de RPA, scrapers e a extração de dados que alimentava um ERP. Foi ali que aprendi a pensar em retentativa, idempotência e monitoramento desde o primeiro commit. Hoje trabalho com saúde, mas o problema aparece em qualquer empresa: um sistema antigo que não pode parar, dados presos em planilha e alguém digitando a mesma informação duas vezes.",
     ],
     location: "Franca, São Paulo, Brasil",
     languages: "Português (nativo), inglês (fluente), espanhol (avançado)",
@@ -50,7 +51,6 @@ export const pt: LocaleCopy = {
   },
   metrics: [
     { id: "yearsExperience", value: METRIC_VALUES.yearsExperience, suffix: "+", label: "anos entregando software" },
-    { id: "productsInProduction", value: METRIC_VALUES.productsInProduction, suffix: "", label: "produtos em produção" },
     { id: "integrations", value: METRIC_VALUES.integrations, suffix: "+", label: "integrações entre sistemas" },
     { id: "monthlyVolume", value: METRIC_VALUES.monthlyVolume, suffix: "", label: "mensagens por mês" },
   ],
@@ -58,11 +58,11 @@ export const pt: LocaleCopy = {
   integration: {
     heading: "Como eu integro sistemas",
     intro:
-      "Hospitais e operações financeiras rodam sobre software que ninguém quer reescrever. Eu me conecto a ele, coloco um contrato estável na frente e garanto que cada mensagem chegue ao destino.",
+      "Toda operação grande roda sobre algum software que ninguém quer reescrever. Eu me conecto a ele, coloco um contrato estável na frente e garanto que cada mensagem chegue ao destino.",
     steps: [
       {
         title: "Conectar",
-        body: "Adaptadores para o que já roda: bancos do prontuário, ERPs e serviços legados, lidos sem atrapalhar a operação.",
+        body: "Adaptadores para o que já roda: prontuário, ERP, portais do governo e serviços legados, lidos sem atrapalhar a operação.",
       },
       {
         title: "Normalizar",
@@ -70,11 +70,11 @@ export const pt: LocaleCopy = {
       },
       {
         title: "Enfileirar",
-        body: "O trabalho passa por BullMQ ou RabbitMQ com retentativas e idempotência, para que um parceiro lento nunca trave um paciente.",
+        body: "O trabalho passa por BullMQ ou RabbitMQ com retentativa e idempotência, para que um parceiro lento não trave o resto da operação.",
       },
       {
         title: "Entregar",
-        body: "Mensagens, pagamentos e dados chegam ao WhatsApp, à Getnet ou ao BI, com cada etapa registrada e rastreável.",
+        body: "Mensagens, pagamentos e dados chegam ao WhatsApp, ao gateway de pagamento, ao ERP ou a uma tela, e cada etapa fica registrada.",
       },
     ],
     diagramTitle: "Sistemas legados, ERP e prontuário alimentam uma API, que enfileira o trabalho para canais, pagamentos e dados.",
@@ -91,14 +91,15 @@ export const pt: LocaleCopy = {
   },
   domains: [
     { id: "healthcare", label: "Saúde", longLabel: "Saúde" },
-    { id: "finance", label: "Finanças", longLabel: "Mercado financeiro" },
+    { id: "finance", label: "Finanças", longLabel: "Financeiro e fiscal" },
     { id: "payments", label: "Pagamentos", longLabel: "Pagamentos" },
     { id: "data", label: "Dados", longLabel: "Dados/ETL" },
     { id: "automation", label: "Automação", longLabel: "Automação (RPA)" },
+    { id: "apps", label: "Apps", longLabel: "Apps web, desktop e mobile" },
   ],
   projects: {
     heading: "Projetos",
-    intro: "Produtos rodando em hospitais e operações financeiras. Abra um para ver o problema, a arquitetura e a stack.",
+    intro: "Uma parte do que está em produção hoje: APIs, apps, painéis e automações. Abra um projeto para ver o problema, a arquitetura e a stack.",
     filterLabel: "Filtrar projetos por domínio",
     filterAll: "Todos",
     openCaseStudy: "Ler estudo de caso",
@@ -175,21 +176,43 @@ export const pt: LocaleCopy = {
         recon: "Conciliação",
       },
     },
-    "scf-auth": {
-      title: "scf-auth",
-      tagline: "Autenticação central para os sistemas do grupo, com login via Tasy.",
+    santaworks: {
+      title: "SantaWorks",
+      tagline: "Back office fiscal e financeiro: captura NF-e e NFS-e, confere com o Tasy, lança e concilia.",
+      problem:
+        "O financeiro baixava notas fiscais nos portais, conferia cada uma contra o Tasy e montava as conciliações em planilha, à mão, todo mês.",
+      solution: [
+        "Jobs agendados buscam NF-e na distribuição da SEFAZ e NFS-e no Ambiente Nacional, registram a manifestação do destinatário e geram DANFE e DANFSE.",
+        "Cada nota é conferida contra o Tasy. As divergências viram pendências para o time resolver, e um worker lança as notas aprovadas.",
+        "Um módulo de conciliação cruza extratos bancários, recebíveis e serviços tomados.",
+        "O front em Next.js com Material UI junta fiscal, financeiro e regulação em um só lugar, com login pelo Autenticador.",
+      ],
+      impact: [],
+      nodes: {
+        fiscal: "SEFAZ e NFS-e Nacional",
+        bank: "Extratos bancários",
+        jobs: "Jobs agendados",
+        api: "API NestJS",
+        db: "PostgreSQL",
+        tasy: "Tasy (OracleDB)",
+        web: "Front Next.js",
+      },
+    },
+    autenticador: {
+      title: "Autenticador",
+      tagline: "SSO do grupo: um login, validado no Tasy, para todos os sistemas internos.",
       problem:
         "Cada produto interno tinha login e regras de permissão próprias, o que dificultava auditar e revogar acessos.",
       solution: [
-        "Um serviço NestJS autentica usuários no Tasy e emite tokens para todos os produtos do grupo.",
-        "Papéis, módulos, setores e estabelecimentos são modelados uma vez e compartilhados por todas as aplicações.",
-        "Os segredos ficam no Vault; um console administrativo gerencia acessos e revogações.",
+        "Um serviço NestJS autentica o usuário no Tasy e emite tokens aceitos por todos os produtos do grupo.",
+        "Papéis, módulos, setores e estabelecimentos são modelados uma vez e valem para todas as aplicações.",
+        "Os segredos ficam no Vault, e um console administrativo cuida de acessos e revogações.",
       ],
       impact: [],
       nodes: {
         apps: "Apps do grupo",
         console: "Console admin",
-        auth: "scf-auth",
+        auth: "Autenticador (SSO)",
         tasy: "Login Tasy",
         db: "Papéis e permissões",
         vault: "Vault",
@@ -227,25 +250,6 @@ export const pt: LocaleCopy = {
         realtime: "Socket.IO",
         dashboards: "Painéis",
         reports: "Relatórios",
-      },
-    },
-    "etl-platform": {
-      title: "Plataforma de ETL e scraping",
-      tagline: "Robôs de RPA que coletam, validam e carregam dados de produção no ERP e no BI.",
-      problem: "Os processos operacional, financeiro e de BI dependiam de dados copiados à mão de portais e sites.",
-      solution: [
-        "Robôs de RPA e scrapers (Selenium, Puppeteer, Playwright) coletam dados de portais externos de forma agendada.",
-        "Os jobs passam pelo RabbitMQ até etapas de ETL que validam e normalizam cada registro.",
-        "Os dados tratados são carregados no ERP e nos painéis de BI.",
-      ],
-      impact: [],
-      nodes: {
-        sources: "Portais e sites",
-        scrapers: "Scrapers Python",
-        queue: "RabbitMQ",
-        etl: "ETL e validação",
-        erp: "ERP",
-        bi: "BI",
       },
     },
     "santa-ia": {
@@ -316,10 +320,10 @@ export const pt: LocaleCopy = {
     intro: "Agrupada pelo papel que cada ferramenta cumpre em produção.",
     groups: [
       { id: "backend", title: "Backend", items: SKILL_ITEMS.backend },
+      { id: "frontend", title: "Frontend e apps", items: SKILL_ITEMS.frontend },
       { id: "data", title: "Dados", items: SKILL_ITEMS.data },
       { id: "infra", title: "Infraestrutura", items: SKILL_ITEMS.infra },
       { id: "integrations", title: "Integrações", items: SKILL_ITEMS.integrations },
-      { id: "frontend", title: "Frontend", items: SKILL_ITEMS.frontend },
     ],
   },
   experience: {
@@ -332,13 +336,15 @@ export const pt: LocaleCopy = {
         organization: "Grupo Santa Casa de Franca / Santa Labs",
         role: "Engenheiro de Software Sênior",
         period: "jun/2026 – atual",
-        summary: "Engenheiro com foco em backend no time que constrói e mantém em produção os produtos de saúde do grupo.",
+        summary:
+          "Engenheiro full stack no time que constrói e mantém os sistemas do grupo: atendimento, operação, fiscal e financeiro.",
         highlights: [
-          "Portfólio de 13 produtos de saúde, 9 deles em produção",
-          "Autenticação central com login via Tasy e permissões por aplicação e módulo",
+          "Dezenas de serviços em produção entre APIs, workers e apps web, desktop e mobile",
+          "Autenticador (SSO) com login via Tasy e permissões por aplicação e módulo",
+          "SantaWorks: captura de NF-e e NFS-e, conferência com o Tasy e conciliação bancária",
           "Mensageria via WhatsApp e voz para confirmações, campanhas e NPS",
           "Totens de autoatendimento, painéis de chamada e app para tablets com deploy contínuo",
-          "Cobrança recorrente com Getnet, automações financeiras e conciliação bancária",
+          "Cobrança recorrente com Getnet",
           "Agentes de IA com LangGraph e LLM local, com RAG em pgvector",
           "Arquitetura multi-cloud (AWS, Cloudflare, servidores locais) e padrão de CI/CD",
         ],
@@ -393,7 +399,7 @@ export const pt: LocaleCopy = {
   },
   contact: {
     heading: "Vamos conversar",
-    body: "Contratando para backend ou integrações? E-mail é o jeito mais rápido de falar comigo.",
+    body: "Tem uma vaga ou um projeto em mente? E-mail é o jeito mais rápido de falar comigo.",
     emailLabel: "E-mail",
     socialLabel: "Redes",
     locationLabel: "Moro em",
