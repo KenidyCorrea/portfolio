@@ -44,7 +44,6 @@ export const en: LocaleCopy = {
       "Before healthcare I built RPA bots, scrapers and data extraction that fed the ERP for operations, finance and BI. That work taught me to design for retries, idempotency and monitoring from the first commit.",
     ],
     location: "Franca, São Paulo, Brazil",
-    availability: "Open to remote roles, including B2B contracts, and to relocating to Spain, the EU or Canada.",
     languages: "Portuguese (native), English (fluent), Spanish (advanced)",
     portraitAlt: "Portrait of Kenidy Corrêa",
     metricsHeading: "In numbers",
@@ -394,7 +393,7 @@ export const en: LocaleCopy = {
   },
   contact: {
     heading: "Let's talk",
-    body: "Hiring for backend or integration work, as an employee or a B2B contractor? E-mail is the fastest way to reach me.",
+    body: "Hiring for backend or integration work? E-mail is the fastest way to reach me.",
     emailLabel: "E-mail",
     socialLabel: "Elsewhere",
     locationLabel: "Based in",

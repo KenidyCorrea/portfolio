@@ -20,7 +20,7 @@ export function Contact() {
         </h2>
         <p className="mt-8 max-w-measure text-step-1 text-fog">{contact.body}</p>
 
-        <div className="mt-14 grid gap-10 border-t border-line pt-10 lg:grid-cols-12">
+        <div className="mt-10 grid gap-8 border-t border-line pt-8 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="text-step--1 text-fog">{contact.emailLabel}</p>
             <a

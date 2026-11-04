@@ -172,7 +172,6 @@ export interface LocaleCopy {
     heading: string;
     paragraphs: readonly string[];
     location: string;
-    availability: string;
     languages: string;
     portraitAlt: string;
     metricsHeading: string;

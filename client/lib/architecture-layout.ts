@@ -125,6 +125,25 @@ function routeEdge(from: PositionedNode, to: PositionedNode, orientation: Orient
   return `M${round(x1)} ${round(y1)} C${round(x1)} ${round(y1 + dy)} ${round(x2)} ${round(y2 - dy)} ${round(x2)} ${round(y2)}`;
 }
 
+/** More nodes than this per row makes labels unreadable on a phone. */
+const MAX_FIT_PER_ROW = 4;
+
+/**
+ * Vertical options that keep each tier on one row (up to MAX_FIT_PER_ROW nodes)
+ * inside `targetWidth`. Wrapped tiers would route edges behind other nodes.
+ */
+export function fitVerticalOptions(
+  architecture: Architecture,
+  targetWidth: number,
+  base: Partial<LayoutOptions> = {},
+): Partial<LayoutOptions> {
+  const o: LayoutOptions = { ...DEFAULTS, ...base, orientation: "vertical" };
+  const widest = Math.max(1, ...groupByTier(architecture.nodes).map((tier) => tier.length));
+  const perRow = Math.min(widest, MAX_FIT_PER_ROW);
+  const available = targetWidth - o.padding * 2 - (perRow - 1) * o.rowGap;
+  return { ...base, orientation: "vertical", maxPerRow: perRow, nodeWidth: Math.min(o.nodeWidth, Math.floor(available / perRow)) };
+}
+
 /** Pure layout: positions nodes by tier and routes edges as cubic curves. */
 export function layoutArchitecture(architecture: Architecture, options: Partial<LayoutOptions> = {}): DiagramLayout {
   const o: LayoutOptions = { ...DEFAULTS, ...options };

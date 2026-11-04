@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import { ArchitectureDiagram } from "@/components/diagram/ArchitectureDiagram";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { gsap, MOTION_QUERIES, REFRESH_PRIORITY, useGSAP } from "@/lib/gsap";
+import type { LayoutOptions } from "@/lib/architecture-layout";
+import { gsap, MOTION_QUERIES, useGSAP } from "@/lib/gsap";
 import { useLocale } from "@/providers/LocaleProvider";
 
-const PIN_DISTANCE = "+=260%";
 const STEP_LABEL = /^step-(\d+)$/;
+/** Wide screens have room for full-size nodes beside the step list. */
+const WIDE_LAYOUT: Partial<LayoutOptions> = { nodeWidth: 156, rowGap: 14 };
 
 /**
  * Scrubbed timeline: each tier of the diagram is one step. Edges leading into
@@ -29,9 +31,10 @@ function buildFlowTimeline(root: HTMLElement, stepCount: number, vars: gsap.Time
   return timeline;
 }
 
-function setActiveStep(root: HTMLElement, activeIndex: number | "all") {
+/** Marks every step up to `lastReached` as reached, so the list fills as the diagram draws. */
+function setReachedSteps(root: HTMLElement, lastReached: number | "all") {
   root.querySelectorAll<HTMLElement>("[data-step]").forEach((step, index) => {
-    step.toggleAttribute("data-active", activeIndex === "all" || index === activeIndex);
+    step.toggleAttribute("data-active", lastReached === "all" || index <= lastReached);
   });
 }
 
@@ -52,35 +55,29 @@ export function IntegrationFlow() {
   useGSAP(
     () => {
       const root = scope.current;
-      if (!root) return undefined;
+      const diagram = root?.querySelector<HTMLElement>("[data-diagram]");
+      if (!root || !diagram) return undefined;
       const stepCount = integration.steps.length;
       const mm = gsap.matchMedia();
 
-      // Desktop: pin the section and scrub the drawing with the scroll.
+      // Desktop: the diagram draws while it crosses the viewport and the steps beside it fill in.
       mm.add(MOTION_QUERIES.desktop, () => {
         const timeline = buildFlowTimeline(root, stepCount, {
-          scrollTrigger: {
-            trigger: root,
-            pin: root.querySelector<HTMLElement>("[data-pin]"),
-            start: "top top",
-            end: PIN_DISTANCE,
-            scrub: 0.8,
-            refreshPriority: REFRESH_PRIORITY.integration,
-          },
+          scrollTrigger: { trigger: diagram, start: "top 80%", end: "bottom 55%", scrub: 0.6 },
         });
-        timeline.eventCallback("onUpdate", () => setActiveStep(root, activeStepAt(timeline)));
-        setActiveStep(root, 0);
+        timeline.eventCallback("onUpdate", () => setReachedSteps(root, activeStepAt(timeline)));
+        setReachedSteps(root, 0);
       });
 
-      // Small screens: no pin; the diagram draws while it crosses the viewport.
+      // Small screens: the steps sit above the diagram, so they stay fully visible.
       mm.add(MOTION_QUERIES.mobile, () => {
         buildFlowTimeline(root, stepCount, {
-          scrollTrigger: { trigger: root.querySelector("svg"), start: "top 85%", end: "bottom 60%", scrub: 0.8 },
+          scrollTrigger: { trigger: diagram, start: "top 85%", end: "bottom 60%", scrub: 0.6 },
         });
-        setActiveStep(root, "all");
+        setReachedSteps(root, "all");
       });
 
-      mm.add(MOTION_QUERIES.reduced, () => setActiveStep(root, "all"));
+      mm.add(MOTION_QUERIES.reduced, () => setReachedSteps(root, "all"));
 
       return () => mm.revert();
     },
@@ -88,44 +85,40 @@ export function IntegrationFlow() {
   );
 
   return (
-    <section ref={scope} id="integrations" aria-labelledby="integration-title" className="relative border-t border-line/60">
-      <div data-pin="" className="flex flex-col justify-center py-section pin:h-[100svh] pin:py-0 pin:pt-16">
-        <div className="frame">
-          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
-            <h2 id="integration-title" className="text-step-4 font-bold type-condensed lg:col-span-6">
-              {integration.heading}
-            </h2>
-            <p className="max-w-measure text-step-0 text-fog lg:col-span-5 lg:col-start-8">{integration.intro}</p>
-          </div>
+    <section ref={scope} id="integrations" aria-labelledby="integration-title" className="border-t border-line/60 py-section">
+      <div className="frame grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-6">
+          <h2 id="integration-title" className="text-step-4 font-bold type-condensed">
+            {integration.heading}
+          </h2>
+          <p className="mt-5 max-w-measure text-step-0 text-fog">{integration.intro}</p>
 
-          {/* Desktop: diagram on top, one step per diagram column below it. */}
-          <div className="mt-10 flex flex-col gap-10 lg:mt-12 lg:max-w-[64rem] lg:gap-8">
-            <ol className="grid gap-6 sm:grid-cols-2 lg:order-2 lg:grid-cols-4 lg:gap-8">
-              {integration.steps.map((step, index) => (
-                <li
-                  key={step.title}
-                  data-step=""
-                  className="border-t-2 border-line pt-4 opacity-50 transition-[opacity,border-color] duration-300 data-[active]:border-signal data-[active]:opacity-100"
-                >
-                  <h3 className="flex items-baseline gap-3 text-step-1 font-semibold">
-                    <span className="font-display font-bold tabular-nums text-signal-ink type-condensed">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-step--1 text-fog">{step.body}</p>
-                </li>
-              ))}
-            </ol>
+          <ol className="mt-8 border-l border-line">
+            {integration.steps.map((step, index) => (
+              <li
+                key={step.title}
+                data-step=""
+                className="group -ml-px border-l-2 border-transparent py-3 pl-5 transition-colors duration-300 data-[active]:border-signal"
+              >
+                <h3 className="flex items-baseline gap-3 text-step-1 font-semibold text-fog transition-colors duration-300 group-data-[active]:text-fg">
+                  <span className="font-display font-bold tabular-nums text-signal-ink type-condensed">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {step.title}
+                </h3>
+                <p className="mt-1 max-w-[52ch] text-step--1 text-fog">{step.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-            <div className="mx-auto w-full max-w-sm lg:order-1 lg:max-w-none">
-              <ArchitectureDiagram
-                architecture={integration.architecture}
-                title={integration.diagramTitle}
-                orientation={isWide ? "horizontal" : "vertical"}
-              />
-            </div>
-          </div>
+        <div data-diagram="" className="mx-auto w-full max-w-sm lg:col-span-5 lg:col-start-8 lg:max-w-[32rem]">
+          <ArchitectureDiagram
+            architecture={integration.architecture}
+            title={integration.diagramTitle}
+            orientation="vertical"
+            layoutOptions={isWide ? WIDE_LAYOUT : undefined}
+          />
         </div>
       </div>
     </section>

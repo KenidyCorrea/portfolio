@@ -89,7 +89,7 @@ function CaseStudyView({ project, next, content }: { project: Project; next: Pro
       </header>
 
       {project.image && (
-        <figure className="frame mt-16">
+        <figure className="frame mt-12">
           <img
             src={projectImageSrc(project.image.base, 1600)}
             srcSet={`${projectImageSrc(project.image.base, 800)} 800w, ${projectImageSrc(project.image.base, 1600)} 1600w`}
@@ -104,7 +104,7 @@ function CaseStudyView({ project, next, content }: { project: Project; next: Pro
         </figure>
       )}
 
-      <div className="frame mt-section space-y-16 pb-section">
+      <div className="frame mt-section space-y-12 pb-section">
         <Block id="case-problem" title={caseStudy.problem}>
           <p className="max-w-measure text-step-2">{project.problem}</p>
         </Block>
@@ -127,7 +127,7 @@ function CaseStudyView({ project, next, content }: { project: Project; next: Pro
             </h2>
             <p className="text-step-0 text-fog lg:col-span-8 lg:col-start-5">{caseStudy.architectureHint}</p>
           </div>
-          <div data-diagram="" className="mx-auto mt-12 max-w-sm md:max-w-5xl">
+          <div data-diagram="" className="mx-auto mt-10 max-w-sm md:max-w-5xl">
             <ArchitectureDiagram
               architecture={project.architecture}
               title={`${caseStudy.architecture}: ${project.title}`}

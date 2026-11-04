@@ -38,7 +38,7 @@ export function Experience() {
 
   return (
     <section ref={scope} id="experience" aria-labelledby="experience-title" className="border-t border-line/60 py-section outline-none">
-      <div className="frame grid gap-12 lg:grid-cols-12">
+      <div className="frame grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h2 id="experience-title" className="text-step-4 font-bold type-condensed lg:sticky lg:top-28">
             {experience.heading}
@@ -49,7 +49,7 @@ export function Experience() {
           <div aria-hidden="true" className="absolute bottom-0 left-[5px] top-2 w-px bg-line">
             <div data-line-fill="" className="h-full w-full origin-top bg-signal" />
           </div>
-          <ol className="space-y-14">
+          <ol className="space-y-10">
             {experience.items.map((item) => (
               <li key={item.id} data-timeline-item="" className="relative grid gap-2 pl-10">
                 <span aria-hidden="true" className="absolute left-0 top-2 h-[11px] w-[11px] rotate-45 border border-signal bg-bg" />

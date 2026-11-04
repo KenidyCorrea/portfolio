@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Architecture } from "@/content/types";
-import { layoutArchitecture, wrapLabel } from "./architecture-layout";
+import { fitVerticalOptions, layoutArchitecture, wrapLabel } from "./architecture-layout";
 
 const ARCH: Architecture = {
   nodes: [
@@ -90,5 +90,49 @@ describe("wrapLabel", () => {
 
   it("never returns more than two lines", () => {
     expect(wrapLabel("one two three four five six", 6).length).toBeLessThanOrEqual(2);
+  });
+});
+
+describe("fitVerticalOptions", () => {
+  const wideTier: Architecture = {
+    nodes: [
+      { id: "in", tier: 0, kind: "source", label: "In" },
+      { id: "a", tier: 1, kind: "channel", label: "A" },
+      { id: "b", tier: 1, kind: "channel", label: "B" },
+      { id: "c", tier: 1, kind: "channel", label: "C" },
+      { id: "d", tier: 1, kind: "channel", label: "D" },
+    ],
+    edges: [
+      { from: "in", to: "a" },
+      { from: "in", to: "b" },
+      { from: "in", to: "c" },
+      { from: "in", to: "d" },
+    ],
+  };
+
+  it("keeps the widest tier on a single row", () => {
+    const options = fitVerticalOptions(wideTier, 360, { rowGap: 10, padding: 8 });
+    const layout = layoutArchitecture(wideTier, options);
+    const rowTops = new Set(layout.nodes.filter((n) => n.tier === 1).map((n) => n.y));
+    expect(options.maxPerRow).toBe(4);
+    expect(rowTops.size).toBe(1);
+  });
+
+  it("shrinks nodes so the diagram fits the target width", () => {
+    const layout = layoutArchitecture(wideTier, fitVerticalOptions(wideTier, 360, { rowGap: 10, padding: 8 }));
+    expect(layout.width).toBeLessThanOrEqual(360);
+  });
+
+  it("never grows nodes past the preset width", () => {
+    const options = fitVerticalOptions(ARCH, 360, { nodeWidth: 156 });
+    expect(options.nodeWidth).toBe(156);
+  });
+
+  it("caps a row at four nodes", () => {
+    const crowded: Architecture = {
+      nodes: Array.from({ length: 6 }, (_, i) => ({ id: `n${i}`, tier: 0, kind: "source" as const, label: `N${i}` })),
+      edges: [],
+    };
+    expect(fitVerticalOptions(crowded, 360).maxPerRow).toBe(4);
   });
 });

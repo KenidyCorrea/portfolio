@@ -19,7 +19,6 @@ export const EASE = {
 
 /** Refresh order for pinned sections (higher refreshes first, matches page order). */
 export const REFRESH_PRIORITY = {
-  integration: 2,
   projects: 1,
 } as const;
 

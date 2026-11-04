@@ -203,7 +203,7 @@ export function Projects() {
           {format(projects.resultsAnnouncement, { count: visibleCount })}
         </p>
 
-        <div data-viewport="" className="mt-12 pin:flex pin:flex-1 pin:items-center pin:overflow-hidden">
+        <div data-viewport="" className="mt-10 pin:flex pin:flex-1 pin:items-center pin:overflow-hidden">
           <ul
             data-track=""
             className="frame relative grid gap-6 sm:grid-cols-2 lg:grid-cols-3 pin:flex pin:w-max pin:max-w-none pin:items-start pin:gap-8 pin:pr-[12vw]"
