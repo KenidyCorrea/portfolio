@@ -1,163 +1,48 @@
-# Fusion Starter
+# Kenidy Corrêa — Portfolio
 
-A production-ready full-stack React application template with integrated Express server, featuring React Router 6 SPA mode, TypeScript, Vitest, Zod and modern tooling.
+Static SPA portfolio (Tech Lead / Backend Engineer). React 18 + React Router 7 (library mode) + TypeScript (strict) + Vite + Tailwind 3, animated with GSAP 3 (@gsap/react) and Lenis. No backend: deployed as static files on Netlify.
 
-While the starter comes with a express server, only create endpoint when strictly neccesary, for example to encapsulate logic that must leave in the server, such as private keys handling, or certain DB operations, db...
-
-## Tech Stack
-
-- **Frontend**: React 18 + React Router 6 (spa) + TypeScript + Vite + TailwindCSS 3
-- **Backend**: Express server integrated with Vite dev server
-- **Testing**: Vitest
-- **UI**: Radix UI + TailwindCSS 3 + Lucide React icons
-
-## Project Structure
-
-```
-client/                   # React SPA frontend
-├── pages/                # Route components (Index.tsx = home)
-├── components/ui/        # Pre-built UI component library
-├── App.tsx                # App entry point and with SPA routing setup
-└── global.css            # TailwindCSS 3 theming and global styles
-
-server/                   # Express API backend
-├── index.ts              # Main server setup (express config + routes)
-└── routes/               # API handlers
-
-shared/                   # Types used by both client & server
-└── api.ts                # Example of how to share api interfaces
-```
-
-## Key Features
-
-## SPA Routing System
-
-The routing system is powered by React Router 6:
-
-- `client/pages/Index.tsx` represents the home page.
-- Routes are defined in `client/App.tsx` using the `react-router-dom` import
-- Route files are located in the `client/pages/` directory
-
-For example, routes can be defined with:
-
-```typescript
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-<Routes>
-  <Route path="/" element={<Index />} />
-  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-  <Route path="*" element={<NotFound />} />
-</Routes>;
-```
-
-### Styling System
-
-- **Primary**: TailwindCSS 3 utility classes
-- **Theme and design tokens**: Configure in `client/global.css` 
-- **UI components**: Pre-built library in `client/components/ui/`
-- **Utility**: `cn()` function combines `clsx` + `tailwind-merge` for conditional classes
-
-```typescript
-// cn utility usage
-className={cn(
-  "base-classes",
-  { "conditional-class": condition },
-  props.className  // User overrides
-)}
-```
-
-### Express Server Integration
-
-- **Development**: Single port (8080) for both frontend/backend
-- **Hot reload**: Both client and server code
-- **API endpoints**: Prefixed with `/api/`
-
-#### Example API Routes
-- `GET /api/ping` - Simple ping api
-- `GET /api/demo` - Demo endpoint  
-
-### Shared Types
-Import consistent types in both client and server:
-```typescript
-import { DemoResponse } from '@shared/api';
-```
-
-Path aliases:
-- `@shared/*` - Shared folder
-- `@/*` - Client folder
-
-## Development Commands
+## Commands
 
 ```bash
-npm run dev        # Start dev server (client + server)
-npm run build      # Production build
-npm run start      # Start production server
-npm run typecheck  # TypeScript validation
-npm test          # Run Vitest tests
+npm run dev        # Vite dev server on :8080
+npm run build      # Production build -> dist/spa
+npm run preview    # Serve the production build
+npm run typecheck  # tsc (strict)
+npm test           # Vitest (content integrity, layout, storage)
+npm run images     # Re-generate WebP images, favicons and OG card (sharp)
 ```
 
-## Adding Features
+## Structure
 
-### Add new colors to the theme
-
-Open `client/global.css` and `tailwind.config.ts` and add new tailwind colors.
-
-### New API Route
-1. **Optional**: Create a shared interface in `shared/api.ts`:
-```typescript
-export interface MyRouteResponse {
-  message: string;
-  // Add other response properties here
-}
+```
+client/
+  main.tsx                 # Entry: CSS, GSAP registration, createRoot
+  App.tsx                  # Providers + routes (/, /projects/:slug lazy, 404)
+  routes.ts                # Lazy case study + preload helper
+  content/                 # ALL visible text lives here
+    types.ts               # Content types (Project, Experience, Metric, SkillGroup, Domain...)
+    shared.ts              # Language-neutral data: links, stack, images, diagram topology, METRIC_VALUES
+    pt.ts / en.ts          # Localized copy (same LocaleCopy shape)
+    index.ts               # buildContent(locale) merges shared + copy; drafts hidden in production
+  lib/
+    gsap.ts                # Single plugin registration + MOTION_QUERIES (import GSAP only from here)
+    architecture-layout.ts # Pure SVG diagram layout (tested)
+    storage.ts             # Guarded localStorage with allow-lists (tested)
+  hooks/                   # useLenis (GSAP ticker), useMediaQuery, usePageEnter, useSectionNav
+  providers/               # Locale, Theme, SmoothScroll (Lenis), PageTransition
+  components/              # layout/, diagram/, projects/, ui/
+  sections/                # Home sections: Hero, TechMarquee, About, IntegrationFlow, Projects, Stack, Experience, Contact
+  pages/                   # Index (home), CaseStudy, NotFound
+public/                    # Served as-is: boot.js (theme/lang before paint), images/*.webp, CVs, icons
+assets/source-images/      # Original images (input of npm run images, not deployed)
 ```
 
-2. Create a new route handler in `server/routes/my-route.ts`:
-```typescript
-import { RequestHandler } from "express";
-import { MyRouteResponse } from "@shared/api"; // Optional: for type safety
+## Rules for changes
 
-export const handleMyRoute: RequestHandler = (req, res) => {
-  const response: MyRouteResponse = {
-    message: 'Hello from my endpoint!'
-  };
-  res.json(response);
-};
-```
-
-3. Register the route in `server/index.ts`:
-```typescript
-import { handleMyRoute } from "./routes/my-route";
-
-// Add to the createServer function:
-app.get("/api/my-endpoint", handleMyRoute);
-```
-
-4. Use in React components with type safety:
-```typescript
-import { MyRouteResponse } from '@shared/api'; // Optional: for type safety
-
-const response = await fetch('/api/my-endpoint');
-const data: MyRouteResponse = await response.json();
-```
-
-### New Page Route
-1. Create component in `client/pages/MyPage.tsx`
-2. Add route in `client/App.tsx`:
-```typescript
-<Route path="/my-page" element={<MyPage />} />
-```
-
-## Production Deployment
-
-- **Standard**: `npm run build` + `npm start`
-- **Binary**: Self-contained executables (Linux, macOS, Windows)
-- **Cloud Deployment**: Use either Netlify or Vercel via their MCP integrations for easy deployment. Both providers work well with this starter template.
-
-## Architecture Notes
-
-- Single-port development with Vite + Express integration
-- TypeScript throughout (client, server, shared)
-- Full hot reload for rapid development
-- Production-ready with multiple deployment options
-- Comprehensive UI component library included
-- Type-safe API communication via shared interfaces
+- **Text**: never hardcode visible strings in components. Add them to `LocaleCopy` in `content/types.ts`, then to both `pt.ts` and `en.ts`. `content.spec.ts` fails if the locales drift.
+- **Projects**: add metadata to `PROJECTS_META` (shared.ts) and copy to `projectCopy` in both locales. Every diagram node needs a label (max 24 chars). `isDraft: true` hides a project in production.
+- **Metrics**: fill `METRIC_VALUES` in shared.ts; `null` values are hidden in production.
+- **Animation**: use `useGSAP` with a `scope`, wrap setup in `gsap.matchMedia()` with `MOTION_QUERIES`, and keep a no-motion fallback (`prefers-reduced-motion`). Pinned layouts use the Tailwind `pin:` screen, which must mirror `MOTION_QUERIES.desktop`.
+- **Images**: add the original to `assets/source-images`, register it in `scripts/optimize-images.mjs`, run `npm run images`, and always set `width`/`height`.
+- **Security**: headers and CSP live in `netlify.toml` (`script-src 'self'`: no inline scripts, no third-party origins). No secrets in the repo; `.env*` is git-ignored.
