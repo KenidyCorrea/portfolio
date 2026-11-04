@@ -1,71 +1,27 @@
-import { Link, useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { motion } from "framer-motion";
-import { Home, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Layout from "@/components/Layout";
+import { SiteLayout } from "@/components/layout/SiteLayout";
+import { buttonClasses } from "@/components/ui/button-styles";
+import { TransitionLink } from "@/components/ui/TransitionLink";
+import { usePageEnter } from "@/hooks/usePageEnter";
+import { useLocale } from "@/providers/LocaleProvider";
 
-const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname,
-    );
-  }, [location.pathname]);
+export default function NotFound() {
+  const { content } = useLocale();
+  usePageEnter(`404 — ${content.notFound.title}`);
 
   return (
-    <Layout>
-      <div className="min-h-screen flex items-center justify-center">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <motion.h1
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-8xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent mb-4"
-          >
-            404
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl text-muted-foreground mb-8"
-          >
-            Ops! A página que você está procurando não existe.
-          </motion.p>
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/">
-              <Button size="lg" className="group">
-                <Home className="mr-2 h-4 w-4" />
-                Ir para Início
-              </Button>
-            </Link>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.history.back()}
-              className="group"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-              Voltar
-            </Button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </Layout>
+    <SiteLayout>
+      <section aria-labelledby="not-found-title" className="frame flex min-h-[80svh] flex-col justify-center pt-28">
+        <p aria-hidden="true" className="font-display text-step-5 font-extrabold text-signal-ink type-condensed">
+          404
+        </p>
+        <h1 id="not-found-title" className="mt-6 text-step-3 font-bold type-condensed">
+          {content.notFound.title}
+        </h1>
+        <p className="mt-4 max-w-measure text-step-1 text-fog">{content.notFound.body}</p>
+        <TransitionLink to="/" className={buttonClasses("primary", "mt-10 self-start")}>
+          {content.notFound.cta}
+        </TransitionLink>
+      </section>
+    </SiteLayout>
   );
-};
-
-export default NotFound;
+}
